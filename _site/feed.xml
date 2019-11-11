@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shsun</title>
+    <description></description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 11 Nov 2019 21:26:10 +0800</pubDate>
+    <lastBuildDate>Mon, 11 Nov 2019 21:26:10 +0800</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Set up a personal website with template</title>
+        <description>&lt;h3 id=&quot;before-start&quot;&gt;Before start&lt;/h3&gt;
+&lt;p&gt;At first I was intended to write all the css and html scripts since I’ve taken related courses. Truth is I only learned the basics, some even outdated. It is also complicated enough for me to give up at the first step. After a year, I decided to use templates and to make things easier.&lt;/p&gt;
+
+&lt;h3 id=&quot;bootstrap-templates&quot;&gt;Bootstrap Templates&lt;/h3&gt;
+&lt;p&gt;By using templates, I meant to implement bootstrap on my current Github website. I read some great tutorials such as &lt;a href=&quot;https://nicolas-van.github.io/bootstrap-4-github-pages/&quot;&gt;Bootstrap 4 start- up&lt;/a&gt; and also the &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;official introduction to bootstrap&lt;/a&gt;. Then I came to this blog template, &lt;a href=&quot;https://github.com/BlackrockDigital/startbootstrap-clean-blog&quot;&gt;Clean Blog&lt;/a&gt;. I’ve seen many people using very similar layout, which they probably forked from this. Finally I decided to fork &lt;a href=&quot;https://huangxuan.me/&quot;&gt;Hux Blog&lt;/a&gt; which is also derived from Clean Blog but with more functions.&lt;/p&gt;
+
+&lt;h3 id=&quot;set-up-environment&quot;&gt;Set up environment&lt;/h3&gt;
+&lt;p&gt;GitHub Pages are powered by &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/a&gt;, a blog-aware static site generator in Ruby. which can be used to maintain your website and test locally. You may need to update your ruby version and change the path for default ruby. To do this, first install rvm:&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
+&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.gem/ruby/X.X.0/bin:&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Install Jekyll with gem.&lt;/p&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bundler jekyll
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To start, use bundler (this will generate a Gemfile):&lt;/p&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;bundle init
+&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;bundle add jekyll
+&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Two major issues I’ve encountered when jekyll failed are ruby version and xcode version. The xcode issue (also outdated gcc version) is solved in &lt;a href=&quot;https://github.com/juthilo/run-jekyll-on-windows/issues/34&quot;&gt;this solution thread&lt;/a&gt; by:&lt;/p&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem sources &lt;span class=&quot;nt&quot;&gt;--remove&lt;/span&gt; https://rubygems.org/
+&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem sources &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; http://rubygems.org/
+&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;start-blogging&quot;&gt;Start blogging&lt;/h3&gt;
+&lt;p&gt;After setting up the website, now it’s time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier. 真香! :smiley:&lt;/p&gt;
+</description>
+        <pubDate>Mon, 11 Nov 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/11/11/first-blog/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/11/11/first-blog/</guid>
+        
+        <category>Blog</category>
+        
+        <category>Jekyll</category>
+        
+        <category>Bootstrap</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
