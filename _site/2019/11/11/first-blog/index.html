@@ -192,7 +192,7 @@ At first I was intended to write all the css and html scripts since I’ve taken
     
 </style>
 
-<header class="intro-header style-text" >
+<header class="intro-header style-text">
 
     <div class="header-mask"></div>
     
@@ -247,35 +247,103 @@ At first I was intended to write all the css and html scripts since I’ve taken
 <h3 id="set-up-environment">Set up environment</h3>
 <p>GitHub Pages are powered by <a href="https://github.com/jekyll/jekyll"><em>Jekyll</em></a>, a blog-aware static site generator in Ruby. which can be used to maintain your website and test locally. You may need to update your ruby version and change the path for default ruby. To do this, first install rvm:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>brew <span class="nb">install </span>ruby
+</pre></td>
+<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>brew <span class="nb">install </span>ruby
 <span class="gp">~$</span><span class="w"> </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/.gem/ruby/X.X.0/bin:<span class="nv">$PATH</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>Install Jekyll with gem.</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>gem <span class="nb">install </span>bundler jekyll
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>gem <span class="nb">install </span>bundler jekyll
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>To start, use bundler (this will generate a Gemfile):</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>bundle init
+</pre></td>
+<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>bundle init
 <span class="gp">~$</span><span class="w"> </span>bundle add jekyll
 <span class="gp">~$</span><span class="w"> </span>bundle <span class="nb">exec </span>jekyll serve
-</pre></td></tr></tbody></table></code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>Two major issues I’ve encountered when jekyll failed are ruby version and xcode version. The xcode issue (also outdated gcc version) is solved in <a href="https://github.com/juthilo/run-jekyll-on-windows/issues/34">this solution thread</a> by:</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>gem sources <span class="nt">--remove</span> https://rubygems.org/
+</pre></td>
+<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>gem sources <span class="nt">--remove</span> https://rubygems.org/
 <span class="gp">~$</span><span class="w"> </span>gem sources <span class="nt">-a</span> http://rubygems.org/
 <span class="gp">~$</span><span class="w"> </span>gem <span class="nb">install </span>jekyll
-</pre></td></tr></tbody></table></code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <h3 id="start-blogging">Start blogging</h3>
-<p>After setting up the website, now it’s time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier. 真香! :smiley:</p>
+<p>After setting up the website, now it’s time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier.</p>
+
+<h3 id="add-emojis-smiley">Add emojis <img class="emoji" title=":smiley:" alt=":smiley:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png" height="20" width="20">
+</h3>
+
+<p>A issue caused by img settings in css files. A couple of lines needed for using <a href="https://github.com/jekyll/jemoji"><em>Jemoji</em></a>.</p>
+<ul>
+  <li>First update sheetstyle file to use inline (if default is block) for img.emoji. Then update min.css file.
+    <div class="language-html highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre>img.emoji {
+  display: inline;
+  height: 1em;
+  width: 1em;
+  margin-bottom: 0.25em;
+}
+</pre></td>
+</tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Install jemoji:
+    <div class="language-console highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="go">gem install jemoji
+</span></pre></td>
+</tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Modify Gemfile (or bundel add jemoji)
+    <div class="language-console highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="go">gem 'jemoji'
+</span></pre></td>
+</tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Add jemoji in config.yml:
+    <div class="highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>plugins:  - jemoji
+</pre></td>
+</tr></tbody></table></code></pre></div>    </div>
+    <p>Some cheat sheet for emojis <a href="https://www.webfx.com/tools/emoji-cheat-sheet/">here</a>.</p>
+  </li>
+</ul>
+
+<h3 id="enjoypig">Enjoy<img class="emoji" title=":pig:" alt=":pig:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f437.png" height="20" width="20">!</h3>
 
 
                 <hr style="visibility: hidden;">
@@ -394,7 +462,7 @@ At first I was intended to write all the css and html scripts since I’ve taken
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright &copy; Shsun 2019
+                    Copyright © Shsun 2019
                     <br>
                 </p>
             </div>
@@ -403,19 +471,19 @@ At first I was intended to write all the css and html scripts since I’ve taken
 </footer>
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/js/jquery.min.js%20"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/js/bootstrap.min.js%20"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/js/hux-blog.min.js%20"></script>
 
 <!-- Service Worker -->
 
-<script src="/js/snackbar.js "></script>
-<script src="/js/sw-registration.js "></script>
+<script src="/js/snackbar.js%20"></script>
+<script src="/js/sw-registration.js%20"></script>
 
 
 <!-- async load function -->
@@ -480,7 +548,7 @@ At first I was intended to write all the css and html scripts since I’ve taken
 
 
 <!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
+<img src="/img/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

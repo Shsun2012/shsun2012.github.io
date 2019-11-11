@@ -42,4 +42,32 @@ Two major issues I've encountered when jekyll failed are ruby version and xcode 
 ~$ gem install jekyll
 ```
 ### Start blogging
-After setting up the website, now it's time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier. 真香! :smiley:
+After setting up the website, now it's time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier.
+
+### Add emojis :smiley:
+
+A issue caused by img settings in css files. A couple of lines needed for using [*Jemoji*](https://github.com/jekyll/jemoji).
+* First update sheetstyle file to use inline (if default is block) for img.emoji. Then update min.css file.
+```html
+img.emoji {
+    display: inline;
+    height: 1em;
+    width: 1em;
+    margin-bottom: 0.25em;
+}
+```
+* Install jemoji:
+```console
+gem install jemoji
+```
+* Modify Gemfile (or bundel add jemoji)
+```console
+gem 'jemoji'
+```
+* Add jemoji in config.yml:
+```
+plugins:  - jemoji
+```
+Some cheat sheet for emojis [here](https://www.webfx.com/tools/emoji-cheat-sheet/).
+
+### Enjoy:pig:!
