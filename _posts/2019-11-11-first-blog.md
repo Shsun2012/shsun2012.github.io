@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Set up a personal website with template"
+title: "Set up a personal website with templates"
 subtitle: 'My first blog'
 author: "Shsun"
 header-style: text
@@ -11,10 +11,10 @@ tags:
 ---
 
 ### Before start
-At first I was intended to write all the css and html scripts since I've taken related courses. Truth is I only learned the basics, some even outdated. It is also complicated enough for me to give up at the first step. After a year, I decided to use templates and to make things easier.
+I was intended to write all the css and html scripts since I've taken related courses in college. Truth is, I have only learned the basics, some even outdated. It is also complicated enough for me to give up at the very first step. After a year, I decide to use templates and to make things easier.
 
 ### Bootstrap Templates
-By using templates, I meant to implement bootstrap on my current Github website. I read some great tutorials such as [Bootstrap 4 start- up](https://nicolas-van.github.io/bootstrap-4-github-pages/) and also the [official introduction to bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/). Then I came to this blog template, [Clean Blog](https://github.com/BlackrockDigital/startbootstrap-clean-blog). I've seen many people using very similar layout, which they probably forked from this. Finally I decided to fork [Hux Blog](https://huangxuan.me/) which is also derived from Clean Blog but with more functions.  
+By using templates, I meant to implement bootstrap on my current Github website. I read some great tutorials such as [Bootstrap 4 start-up](https://nicolas-van.github.io/bootstrap-4-github-pages/) and also the [official introduction to bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/). Then I came to this blog template, [Clean Blog](https://github.com/BlackrockDigital/startbootstrap-clean-blog). I've seen many people using very similar layout, which they probably forked from this. Finally I decided to fork [Hux Blog](https://huangxuan.me/) which is also derived from Clean Blog but with more functions.  
 
 ### Set up environment
 GitHub Pages are powered by [_Jekyll_](https://github.com/jekyll/jekyll), a blog-aware static site generator in Ruby. which can be used to maintain your website and test locally. You may need to update your ruby version and change the path for default ruby. To do this, first install rvm:
@@ -69,5 +69,4 @@ gem 'jemoji'
 plugins:  - jemoji
 ```
 Some cheat sheet for emojis [here](https://www.webfx.com/tools/emoji-cheat-sheet/).
-
-### Enjoy:pig:!
+* Enjoy:pig:!
