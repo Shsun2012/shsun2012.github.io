@@ -46,7 +46,7 @@ After setting up the website, now it's time to start blogging with markdown whic
 
 ### Add emojis :smiley:
 
-A issue caused by img settings in css files. A couple of lines needed for using [*Jemoji*](https://github.com/jekyll/jemoji).
+A couple of lines may be needed for using [*Jemoji*](https://github.com/jekyll/jemoji).
 * First update sheetstyle file to use inline (if default is block) for img.emoji. Then update min.css file.
 ```html
 img.emoji {
