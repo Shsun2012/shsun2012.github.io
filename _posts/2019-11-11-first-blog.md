@@ -11,7 +11,7 @@ tags:
 ---
 
 ### Before start
-I was intended to write all the css and html scripts since I've taken related courses in college. Truth is, I have only learned the basics, some even outdated. It is also complicated enough for me to give up at the very first step. After a year, I decide to use templates and to make things easier.
+I was intended to write all the css and html scripts when I decided to set up my personal website. Truth is, I have only learned the basics, some of which are even outdated. Besides, setting up a website from scratch is also complicated enough for me to give up at the very first step. After a year, I surrendered and decided to use templates as ordinary people like me would do.
 
 ### Bootstrap Templates
 By using templates, I meant to implement bootstrap on my current Github website. I read some great tutorials such as [Bootstrap 4 start-up](https://nicolas-van.github.io/bootstrap-4-github-pages/) and also the [official introduction to bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/). Then I came to this blog template, [Clean Blog](https://github.com/BlackrockDigital/startbootstrap-clean-blog). I've seen many people using very similar layout, which they probably forked from this. Finally I decided to fork [Hux Blog](https://huangxuan.me/) which is also derived from Clean Blog but with more functions.  
