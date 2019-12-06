@@ -10,12 +10,9 @@ tags:
   - Book Review
 ---
 
-Deep learning is a subfield of machine learning and is also a hot topic nowadays.
+Deep learning is a subfield of machine learning and is also a hot topic nowadays. Three properties about deep learning: simplicity, scalability, versatility and reusability.
 
-Three properties about deep learning is simplicity, scalability, versatility and reusability.
-
-Neural Network
-
+##### Neural Network  
 Four types of real-world examples of data tensors are given:
 * _Vector data_ - 2D tensors of shape
 * _Timeseries data or sequence data_ - 3D tensors of shape
