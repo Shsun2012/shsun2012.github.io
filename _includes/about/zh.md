@@ -4,10 +4,14 @@
 * Comparison and evaluation of different ozone dry deposition schemes in a terrestrial biospheric model (in prep)
 
 ### CONFERENCE
-* [5th iLEAPS Science Conference, Oxford, UK - September 2017](https://ileaps.org/content/5th-ileaps-science-conference-oxford-uk-september-2017)
+* [5th iLEAPS Science Conference, Oxford, UK - September 2017](https://ileaps.org/content/5th-ileaps-science-conference-oxford-uk-september-2017)   
 B110 - ORAL-0274: Relationships between ozone and stomatal conductance: implications for surface ozone air quality as simulated by in a chemical transport model
-* [2018 AGU Fall Meeting in Washington, DC, USA](https://www.agu.org/Fall-Meeting)
-A51J-2298 Poster: Comparison and evaluation of different ozone dry deposition schemes in a terrestrial biospheric model
+* [2018 AGU Fall Meeting in Washington, DC, USA](https://www.agu.org/Fall-Meeting)  
+A51J-2298 Poster: Comparison and evaluation of different ozone dry deposition schemes in a terrestrial biospheric model  
+* [PHYSMOD 2019: Workshop on Physical Modeling of Environmental Flow & Dispersion Phenomena, Hong Kong](http://physmod2019.org/)  
+Oral presentation: #42 Evaluation of Different Ozone Dry
+Deposition Schemes in A Terrestrial Biospheric
+Model
 
 ### EDUCATION
 
