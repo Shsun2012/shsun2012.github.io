@@ -1,33 +1,5 @@
+### About me
 
-### PUBLICATIONS
-* [Coupling between surface ozone and leaf area index in a chemical transport model: Strength of feedback and implications for ozone air quality and vegetation health](https://www.researchgate.net/publication/328106061_Coupling_between_surface_ozone_and_leaf_area_index_in_a_chemical_transport_model_Strength_of_feedback_and_implications_for_ozone_air_quality_and_vegetation_health/citations?latestCitations=PB%3A336901546)
-* Comparison and evaluation of different ozone dry deposition schemes in a terrestrial biospheric model (in prep)
+From Northeast China. Grew up with a passion about environment protection. Somehow graduated with a major called "Environmental Sciences". Currently being more realistic and tired of politic issues. Only wish for peace and equality. 
 
-### CONFERENCE
-* [5th iLEAPS Science Conference, Oxford, UK - September 2017](https://ileaps.org/content/5th-ileaps-science-conference-oxford-uk-september-2017)   
-B110 - ORAL-0274: Relationships between ozone and stomatal conductance: implications for surface ozone air quality as simulated by in a chemical transport model
-* [2018 AGU Fall Meeting in Washington, DC, USA](https://www.agu.org/Fall-Meeting)  
-A51J-2298 Poster: Comparison and evaluation of different ozone dry deposition schemes in a terrestrial biospheric model  
-* [PHYSMOD 2019: Workshop on Physical Modeling of Environmental Flow & Dispersion Phenomena, Hong Kong](http://physmod2019.org/)  
-Oral presentation: #42 Evaluation of Different Ozone Dry
-Deposition Schemes in A Terrestrial Biospheric
-Model
-
-### EDUCATION
-
-#### **Peking University**  (Sep 2012~ Jul 2016)              
-* Bachelor of Science
-* Major: Environmental Sciences
-* Minor: Computer Science
-
-#### **The Chinese University of Hong Kong**  (Aug 2016 ~ Now)
-* [Tai Group for Atmosphere-Biosphere Interactions](http://www.cuhk.edu.hk/sci/essc/tgabi/)
-* PhD Candidate
-
-### SKILLS
-* R, python, C++, Java
-* Data analysis
-* Native Chinese speaker, fluent in English, N2 in Japanese
-
-### INTERESTS
-* Adobe products
+Various interests. Love innovative creations. Skilled in digital painting, manga, video editting, independent game developing ...... Used to be interested in learning language. Took Japanese and Greek classes in college. Once tried to learn Cantonese with no idea that I actually came to Hong Kong after graduation.  
