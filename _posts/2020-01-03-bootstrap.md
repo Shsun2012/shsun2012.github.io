@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Bootstrap in R"
+title: "Bootstrapping in R"
 subtitle: 'Notes'
 author: "Shsun"
 header-style: text
 tags:
   - R
 ---
-Bootstrapping method in R is convenient with the boot package.
+Bootstrapping method in R is convenient with the `boot` package.
 
 ### What is bootstrap
 Bootstrap is used to estimate quantity of a population by sampling with replacement. This is done by repeatedly taking relatively small samples, calculating the statistics, and taking the average fo the calculated statistics. A useful feature of the bootstrap method is that the resulting sample of estimation often forms a Gaussian distribution. A confidence interval can be calculated and used to bound the presented estimate, which can be used to present the estimated skill of a machine learning model. There are several forms of bootstrap: non-parametric, parametric, residual sampling, etc. Here we talk about the **non-parametric bootstrap**, or case resampling. All original observations have equal probability of being drawn into a sample.
@@ -26,13 +26,15 @@ There are two parameters: the size of the sample and the number of repetitions. 
 
 Using the [boot](https://www.rdocumentation.org/packages/boot/versions/1.3-23?tap_a=5644-dce66f&tap_s=10907-287229) package in R as the following steps:
 1. Define a function to return statistics
-2. Use the boot function
-3. Use the boot.ci function to get the confidence intervals
+2. Use the `boot` function
+3. Use the `boot.ci` function to get the confidence intervals
+
+When we run the boot function, we have to decide the number of repetitions (R). Wilcox (2010) writes "599 is recommended for general use", which is a minimum number of samples you should consider.
 
 
 ### How to interpret bootstrapping results
 
-First we run the boot function, then we apply the boot.ci function which generates 5 different types of equi-tailed two-sided nonparametric confidence intervals: the basic bootstrap interval, teh studentized bootstrap interval, the bootstrap percentile interval, and the adjusted bootstrap percentile interval. Here we use "bca", which is a matric with 5 columns, the first column containing the level, the next two containing the indices of the order statistics used in the calculations and final two the calculated endpoints themselves.  
+We apply the `boot.ci` function which generates 5 different types of equi-tailed two-sided nonparametric confidence intervals: the basic bootstrap interval, the studentized bootstrap interval, the bootstrap percentile interval, and the adjusted bootstrap percentile interval. Here we use `type = 'bca'`, which is a matric with 5 columns, the first column containing the level, the next two containing the indices of the order statistics used in the calculations and final two the calculated endpoints themselves.  
 
 ```
 results = boot(data = observations, statistic = vd.mean, R = 10000)
@@ -44,3 +46,4 @@ ci.results = boot.ci(results, type = 'bca')
 
 1. [Understanding bootstrap confidence interval output from the r boot package](https://www.r-bloggers.com/understanding-bootstrap-confidence-interval-output-from-the-r-boot-package/)  
 2. [Nonparametric Bootstrap confidence Intervals](https://stat.ethz.ch/R-manual/R-patched/library/boot/html/boot.ci.html)
+3. Wilcox, R. R. (2010). Fundamentals of modern statistical methods: Substantially improving power and accuracy. Springer.

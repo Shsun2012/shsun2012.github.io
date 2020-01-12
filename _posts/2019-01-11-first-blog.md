@@ -42,7 +42,7 @@ Two major issues I've encountered when jekyll failed are ruby version and xcode 
 ~$ gem install jekyll
 ```
 ### Start blogging
-After setting up the website, now it's time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier.
+After setting up the website, now it's time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier. Some useful cheat sheet for markdown [here](https://paperhive.org/help/markdown). 
 
 ### Add emojis :smiley:
 
