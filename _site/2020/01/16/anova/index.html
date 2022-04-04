@@ -11,16 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Biography - shsun的博客 | Shsun">
+    <meta property="og:title" content="anova - shsun的博客 | Shsun">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="Susie Shihan Sun">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="ANOVA table gives the significance of the overall model. ANOVA is a statistical process first derived by R. A. Fisher in 1925.
+">
+    
+    <meta property="article:published_time" content="2020-01-16T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Shsun">
+    
+    
+    <meta property="article:tag" content="R">
+    
     
     <meta property="og:image" content="https://shsun2012.github.io/img/about-bg.jpg">
-    <meta property="og:url" content="https://shsun2012.github.io/about/">
+    <meta property="og:url" content="https://shsun2012.github.io/2020/01/16/anova/">
     <meta property="og:site_name" content="shsun的博客 | Shsun">
     
-    <title>Biography - shsun的博客 | Shsun</title>
+    <title>anova - shsun的博客 | Shsun</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://shsun2012.github.io/about/">
+    <link rel="canonical" href="https://shsun2012.github.io/2020/01/16/anova/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -60,7 +70,7 @@
 
     <!-- Navigation -->
 
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -168,57 +178,258 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header style-text" >
 
-
-<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>Biography</h1>
-          <span class="subheading">Susie Shihan Sun</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=R" title="R">R</a>
+                        
+                    </div>
+                    <h1>anova</h1>
+                    
+                    <h2 class="subheading">More notes</h2>
+                    <span class="meta">Posted by Shsun on January 16, 2020</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
-<!-- NO SIDEBAR -->
-    <!-- PostList Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
-                <!-- English Version -->
-<div class="en post-container">
-    
-    <h3 id="about-susie-sun">About Susie Sun</h3>
-<p>Dr Susie graduated from the Chinese University of Hong Kong in 2021 with a Ph.D. degree in Earth and Atmospheric Sciences. She started one year of postdoctoral research at the University of Hong Kong. In 2022, she went back to CUHK and continued her research work.</p>
 
-</div>
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>ANOVA table gives the significance of the overall model. ANOVA is a statistical process first derived by R. A. Fisher in 1925.</p>
+
+<p>The anova() function call returns an <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc433.htm">ANOVA table</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre>&gt; PC.reg = lm(Y.n ~ -1 + PC1 + PC2 + PC3 + PC4 + PC5, na.action=na.exclude)
+&gt; anova(PC.reg)
+Analysis of Variance Table
+
+Response: Y.n
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+PC1         1  64.47  64.472 78.6426 &lt; 2.2e-16 ***
+PC2         1   7.56   7.556  9.2169 0.0024664 **
+PC3         1   4.44   4.436  5.4110 0.0202300 *  
+PC4         1  81.74  81.743 99.7092 &lt; 2.2e-16 ***
+PC5         1   9.23   9.227 11.2549 0.0008271 ***
+Residuals 907 743.57   0.820                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The function confint is used to calculate confidence intervals on the treatment parameters, by default 95% confidence intervals.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>&gt; confint(PC.reg)
+         2.5 %    97.5 %
+PC1 0.12730735 0.1996705
+PC2 0.02211786 0.1030011
+PC3 0.01113563 0.1313582
+PC4 0.26906828 0.4007092
+PC5 0.05378127 0.2054072
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>There are three types of sum of squares in anova output. Consider a model that includes two factors A and B; there are two main effects and an interaction, AB. The full model is represented by SS(A, B, AB). The influence of factors and interactions can be tested by examining difference between models. For example, to test the interaction effect, we can do a F-test of model SS(A, B, AB) and model SS(A, B)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>SS(AB | A, B) = SS(A, B, AB) – SS(A, B)
+SS(A | B, AB) = SS(A, B, AB) – SS(B, AB)
+SS(B | A, AB) = SS(A, B, AB) – SS(A, AB)
+SS(A | B) = SS(A, B) – SS(B)
+SS(B | A) = SS(A, B) – SS(A)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>The notation shows the incremental differences in sums of squares, for example SS(AB</td>
+      <td>A, B) represents “the sum of squares for interaction after the main effects”, and SS(A</td>
+      <td>B) is “the sum of squares for the A main effect after the B main effect and ignoring interactions”.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="reference">Reference</h6>
+<ol>
+  <li><a href="https://mcfromnz.wordpress.com/2011/03/02/anova-type-iiiiii-ss-explained/">Anova - Type I/II/III SS explained</a></li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/01/14/pca/" data-toggle="tooltip" data-placement="top" title="PCA">
+                        Previous<br>
+                        <span>PCA</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/01/31/mlr/" data-toggle="tooltip" data-placement="top" title="MLR">
+                        Next<br>
+                        <span>MLR</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
 
             </div>
+
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
 
-            </div>
-        
-	</div>
-</div>
+                <!-- Featured Tags -->
+                
 
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0011" 
+                    href="/archive/?tag=Blog"
+                    title="Blog"
+                    rel="3">Blog</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=R"
+                    title="R"
+                    rel="8">R</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=PCA"
+                    title="PCA"
+                    rel="2">PCA
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 

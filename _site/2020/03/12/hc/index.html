@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Hierarchical Clustering - shsun的博客 | Shsun">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Cluster analysis (CA) can be classified as hierarchical and non-hierarchical. Two most popular CA techniques are introduced: hierarchical agglomerative, and k-means. Currentl I am tring to identify...">
+    
+    <meta property="article:published_time" content="2020-03-12T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Shsun">
+    
+    
+    <meta property="article:tag" content="R">
+    
+    
+    <meta property="og:image" content="https://shsun2012.github.io/img/about-bg.jpg">
+    <meta property="og:url" content="https://shsun2012.github.io/2020/03/12/hc/">
+    <meta property="og:site_name" content="shsun的博客 | Shsun">
+    
+    <title>Hierarchical Clustering - shsun的博客 | Shsun</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://shsun2012.github.io/2020/03/12/hc/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Shsun</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">Biography</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/research/">Research</a>
+                    </li>
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from
+     * $toggle/$collapse will break global delegation.
+     *
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=R" title="R">R</a>
+                        
+                    </div>
+                    <h1>Hierarchical Clustering</h1>
+                    
+                    <h2 class="subheading">Notes</h2>
+                    <span class="meta">Posted by Shsun on March 12, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>Cluster analysis (CA) can be classified as hierarchical and non-hierarchical. Two most popular CA techniques are introduced: hierarchical agglomerative, and k-means. Currentl I am tring to identify spatial and temporal patterns as well as impacts from local synoptic meteorology with CA and PCA.</p>
+
+<h5 id="hierarchical-clustering">Hierarchical clustering</h5>
+<p>Hierarchical clustering algorithms in a agglomerative manner (bottom-up) is implemented as following steps:</p>
+<ol>
+  <li>Pre-processing observations by scaling and normalizing.</li>
+  <li>Consider each observation as a cluster and calculate distances between clusters.</li>
+  <li>Two clusters with minimum distances are combined and replaced by a single cluster.</li>
+  <li>Repeat 2 and 3 steps.</li>
+</ol>
+
+<p>There are different ways to calculate the distances between clusters: complete-linkage, single linkage, average linkage, and centroid linkage. The dendrogram from hierarchical clustering can be used to decide number of clusters.</p>
+
+<h5 id="non-hierarchical-clustering">Non-hierarchical clustering</h5>
+<p>K-means clustering aims to divide <em>m</em> objects in <em>n</em> dimensions into k clusters such that within-cluster sum of squares is minimized. K-means iterative clustering method is as follows:</p>
+<ol>
+  <li>Choose a <em>k</em> value as initial set of <em>k</em> centroids.</li>
+  <li>Assign each of the objects to the cluster with nearest centroid.</li>
+  <li>Determine the new centroids of the k clusters.</li>
+  <li>Repeat 2 and 3 steps.</li>
+</ol>
+
+<h5 id="two-stage-clustering">Two-stage clustering</h5>
+<p>Two-stage clustering is a combination of two clustering methods, where the output from the first is used as input of the second clustering. Hierarchical clustering is the first, and k-means is the second. The hierarchical relationship from the first stage is used as “seeds” in the k-means algorithm.</p>
+
+<p>A useful package for a two-stage clustering package <a href="https://github.com/jrosen48/prcr"><code class="language-plaintext highlighter-rouge">prcr</code></a>, which is for person-centered analysis.</p>
+
+<h5 id="clustering-routine-in-r">Clustering Routine in R</h5>
+
+<p><code class="language-plaintext highlighter-rouge">kmeans()</code> does basic k-means clustering. <code class="language-plaintext highlighter-rouge">hclust()</code> does hierarchical aggomerative clustering. Then use <code class="language-plaintext highlighter-rouge">plot()</code> to check teh results. Basically, using agglomerative hierarchical method <em>hclust</em> aims to merge small clusters into larger ones, which is also computationally easy and fast.</p>
+
+<p>Using optimal partitioning method such as kmeans requires decision of how many clusters to use, as well as an initial clustering. kmeans does a random assignment of groups to start with. To set a nonrandom start can avoid this by specifying the centers of teh clusters.</p>
+
+<p>To determine the number of clusters, we can use pseudo-F test. Psuedo F describes the ratio of between cluster variance to within-cluster variance. Before using kmeans, we can use the elbow plot to check how many clusters we can use. The following code is what I use to find clusters:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>km.out = kmeans(PCA$PC.data[,1:5], centers = ncluster, nstart = 50, iter.max = 100)
+km.cluster = km.out$cluster
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>To avoid the error that kmeans not converge in 10 iterations, we can set <code class="language-plaintext highlighter-rouge">iter.max</code> to a larger number for it to converge.</p>
+
+<h6 id="reference">Reference</h6>
+<ol>
+  <li>https://doi.org/10.1016/j.apr.2019.09.009</li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/02/17/weathermap/" data-toggle="tooltip" data-placement="top" title="Weather map explained">
+                        Previous<br>
+                        <span>Weather map explained</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0011" 
+                    href="/archive/?tag=Blog"
+                    title="Blog"
+                    rel="3">Blog</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=R"
+                    title="R"
+                    rel="8">R</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=PCA"
+                    title="PCA"
+                    rel="2">PCA
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/Shsun2012">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Shsun 2022
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

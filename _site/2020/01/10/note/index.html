@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Basic statistics with R - shsun的博客 | Shsun">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Currently I am analysing meteorological impacts on stomatal conductance as well as how these interactions would affect surface ozone contrations. Previously I listed many variables and tried to fin...">
+    
+    <meta property="article:published_time" content="2020-01-10T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Shsun">
+    
+    
+    <meta property="article:tag" content="R">
+    
+    <meta property="article:tag" content="PCA">
+    
+    
+    <meta property="og:image" content="https://shsun2012.github.io/img/about-bg.jpg">
+    <meta property="og:url" content="https://shsun2012.github.io/2020/01/10/note/">
+    <meta property="og:site_name" content="shsun的博客 | Shsun">
+    
+    <title>Basic statistics with R - shsun的博客 | Shsun</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://shsun2012.github.io/2020/01/10/note/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Shsun</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">Biography</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/research/">Research</a>
+                    </li>
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from
+     * $toggle/$collapse will break global delegation.
+     *
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=R" title="R">R</a>
+                        
+                        <a class="tag" href="/archive/?tag=PCA" title="PCA">PCA</a>
+                        
+                    </div>
+                    <h1>Basic statistics with R</h1>
+                    
+                    <h2 class="subheading">Notes about correlation, PCA, PCR</h2>
+                    <span class="meta">Posted by Shsun on January 10, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>Currently I am analysing meteorological impacts on stomatal conductance as well as how these interactions would affect surface ozone contrations. Previously I listed many variables and tried to find the patterns, using MERRA2 meteorology and surface ozone concentrations to analyse meteorology impacts on ozone in US. Given MERRA2 meteorology, SPEI data, surface, ozone concentrations, use following steps to practice basic data analysis in R:</p>
+<ol>
+  <li>Calculate the moving average of meteorological variables and get the deseasonalized daily values.</li>
+  <li>Do regression between ozone and meteorology.</li>
+  <li>Calculate PCA for each grid</li>
+  <li>Plot maps of PC with ggplot</li>
+</ol>
+
+<h5 id="linear-regression">Linear regression</h5>
+<p>Pre-work before regression or correlation is important. The first two steps include calculating moving averages (MA) and correlations. Moving averages can smooth out the noise of random outliers and emphasize long-term trends. In this case, we subtract MA from daily values to remove the long-term trend and focus on deseasonalized day-to-day variablities. Normalization of variables is also necessary, because the original variables may have different scales. Performing PCA on un-normalized variables will lead to insanely large loadings for variables with high variance. In turn, this would lead to dependence of a PC on the variable with high variance. This can easily be done in R.</p>
+
+<p>Then we use the deseasonalized daily values to calculate correlations. Now we can use <code class="language-plaintext highlighter-rouge">lm</code> or <code class="language-plaintext highlighter-rouge">glm</code> for regression analysis.  <code class="language-plaintext highlighter-rouge">lm</code> fits models with the form <code class="language-plaintext highlighter-rouge">Y = Xb + e</code>, while <code class="language-plaintext highlighter-rouge">glm</code> fits models with the form <code class="language-plaintext highlighter-rouge">f(Y) = Xb + e</code>. The <code class="language-plaintext highlighter-rouge">glm</code> generalizes the linear model into the expotential family, while <code class="language-plaintext highlighter-rouge">lm</code> assumes data following a specific distribution: Normal or Gauss. <code class="language-plaintext highlighter-rouge">lm.beta</code> adds the standarlized regression coefficients to objects created by <code class="language-plaintext highlighter-rouge">lm</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>reg = lm(O3 ~ T2M + QV2M + PRECTOT + GWETROOT + SLP + WIND + SWGDN + CLDTOT, na.action=na.exclude)
+reg.st = lm.beta(reg)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="model-selection">Model selection</h4>
+<h6 id="forward-selection">Forward selection</h6>
+<p>First we start with the linear regression model <code class="language-plaintext highlighter-rouge">lm</code> with the most significant independent variable. Then we extend the model with the remaining independent variables one at a time. We stop when there is no significant extensions anymore.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>summary(lm(O3 ~ T2M + WIND))
+summary(lm(O3 ~ T2M + WIND + QV2M))  # add variable and check p-value
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h6 id="backward-selection">Backward selection</h6>
+<p>Start with the full modeland remove the most insignificant independent variable. Finally we stop when all p values are significant.</p>
+
+<h4 id="pca-analysis">PCA analysis</h4>
+<p>The fundamentals of PCA have been discussed over and over again. The aim of PCA is to create a new set of uncorrelated variables that are a linear combination of the initial variables and explain as much of the initial variation as possible. When analysing meteorological variables, we always use PCA to extract the uncorrelated principal components as original meteorolgical factors are usually correlated with each other. Basically, PC1 is a linear combination of orignial predictor variables which captures the maximum variance in the dataset. It determines the direction of highest variablity in the data. PC2 is also a linear combination of original predictors which captures the remaining variance in the dataset and is uncorrelated with PC1.</p>
+
+<p>There are two general methods to perform PCA in R:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">princomp()</code>, the spectral decomposition approach which examines the covariances/correlations between variables</li>
+  <li><code class="language-plaintext highlighter-rouge">prcomp()</code> and <code class="language-plaintext highlighter-rouge">PCA()</code>, the singular value decomposition (SVD)
+The simplified format of these two functions are:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>prcomp(x, scale = FALSE) # x is a numeric matrix or data frame; scale is a logical value indicating whether the variables should be scaled to have unit variance before the analysis takes place
+princomp(x, cor = FALSE, scores = TRUE) # cor is a logical value, if TRUE, the data will be centered and scaled before analysis;
+# scores is a logical value, if TRUE, the coordinates on each principal component are calculated.
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>The output elements returned by the functions prcomp and princomp:</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>prcomp() name</th>
+      <th>princomp() name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sdev</td>
+      <td>sdev</td>
+      <td>the standard deviations of principal components</td>
+    </tr>
+    <tr>
+      <td>rotation</td>
+      <td>loadings</td>
+      <td>the matrix of variable loadings (columns are eigenvectors)</td>
+    </tr>
+    <tr>
+      <td>center</td>
+      <td>center</td>
+      <td>the variable means (means that were substracted)</td>
+    </tr>
+    <tr>
+      <td>scale</td>
+      <td>scale</td>
+      <td>the variable standard deviations (the scaling applied to each variable)</td>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>scores</td>
+      <td>the coordinates of the individuals (observations) on the principal components</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here we focus on <code class="language-plaintext highlighter-rouge">prcomp()</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>pca = prcomp(~X.data, scale=TRUE, na.action=na.exclude)
+PC.sd = pca$sdev
+PC.rot = pca$rotation
+PC.data = pca$x
+pca.var.per = round(pca.var/sum(pca.var)*100, 1)
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>By default, <code class="language-plaintext highlighter-rouge">prcomp()</code> expects samples (observations) to be rows and the variables to be columns. returns <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">sdev</code>, and <code class="language-plaintext highlighter-rouge">rotation</code>. <strong>x</strong> contains the PCs for grawing a graph. <code class="language-plaintext highlighter-rouge">plot(pca$x[,1], pca$x[,2])</code> can be used to plot for the first two PCs. The x and y axis tells about he percentage of the variatioin in the original data that PC1 and PC2 account for. <code class="language-plaintext highlighter-rouge">pca$rotation</code> record loading scores for each PC. Loading scores can be used to determine which variables have the largest effects. <code class="language-plaintext highlighter-rouge">pca$rotation[,1]</code> is the loading scores for PC1.One of the disadventage of PC is interpreting the PCs. When the PC1 is highly correlated with all variables, we can say it summarizes the data well and that instead of using the meteorological variables to make prediction, we can just use PC1. If two meteorological variables are correlated with each other, perhaps usign one new variable (i.e. PC1) can summarize both variables.</p>
+
+<h5 id="pcr-analysis">PCR analysis</h5>
+<p>We also want to know whether the new PCs can predict the phenomena well after PCA analysis. We use <code class="language-plaintext highlighter-rouge">lm()</code> to see if PC1 ~ PC4 can predict Y.n (i.e., ozone) well.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>PC.reg = lm(Y.n ~ -1 + PC1 + PC2 + PC3 + PC4, na.action = na.exclude)
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>To see how well this model can predict ozone, we can use <code class="language-plaintext highlighter-rouge">fitted()</code> function to see the prediction.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>fitted(PC.reg)
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h5 id="factor-analysis">Factor analysis</h5>
+<p>The intuition of PCA is to find new combination of variables which form larger variances, while FA is to find hidden variables which affect your observed variables by looking at the correlation. FA in R is easy to dy by a function <code class="language-plaintext highlighter-rouge">factanal()</code>, which fits a common factor model by the method of maximum likelihood. Note that the function can analyze either raw data or a correlation or covariance matrix. To begin with , here I use SynFlux data combined with FLUXNET meteorology and SPEI data with a 2 factor model:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>ml = df[c('liq_precip','wind','vpd','qv2m','t2m','swgdn','gwetroot','cldtot','spei')]
+factanal(ml, factor = 2)
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Then we get output like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre>Call:
+factanal(x = ml, factors = 2)
+
+Uniquenesses:
+liq_precip       wind        vpd       qv2m        t2m      swgdn   gwetroot     cldtot       spei
+     0.983      0.999      0.005      0.005      0.005      0.790      0.876      0.723      1.000
+
+Loadings:
+           Factor1 Factor2
+liq_precip  0.125         
+wind                      
+vpd                 0.998
+qv2m        0.993         
+t2m         0.799   0.598
+swgdn       0.136   0.437
+gwetroot   -0.182  -0.301
+cldtot     -0.377  -0.367
+spei                      
+
+               Factor1 Factor2
+SS loadings      1.834   1.782
+Proportion Var   0.204   0.198
+Cumulative Var   0.204   0.402
+
+Test of the hypothesis that 2 factors are sufficient.
+The chi square statistic is 2236.75 on 19 degrees of freedom.
+The p-value is 0
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>At the bottom of the output, we can see that the significance level is very small, which indicates that the hypothesis of perfect model fit is reject.</p>
+
+<p>The model gets improved if you have more variables, which shows the trade-off between the number of variables and the accuracy of the model. Similar to PCA, we can look at the cumulative portion of variance, and if that reaches some numbers, we can stop adding more factors. The Kaiser rule is to discard components whose eigenvalues are below 1.0.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>ev = eigen(cor(data))
+ev$values
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>By looking at how many values are over 1.0, we can decide the number of factors. There is no definitive way to determine the number of factors.</p>
+
+<p>Another method is to use variance inflation factor (VIF,<a href="https://en.wikipedia.org/wiki/Variance_inflation_factor">wiki</a>). VIF measures how much the variance of an estimated regression coefficient increases if your predictors are correlated, which detects multicollinearity in regression analysis: <br />
+<img src="https://latex.codecogs.com/gif.latex?VIF%3D%5Cfrac%7B1%7D%7B1-R%5E%7B2%7D%7D" alt="equation" />  <br />
+where R is correlation coefficients. A VIF value less than 1 is defined as non-correlated, while a VIF greater than 5 means highly correlated.</p>
+<h5 id="reference">Reference</h5>
+<ol>
+  <li><a href="https://rstudio-pubs-static.s3.amazonaws.com/222571_7b65a75ec1214b56bccafa79e8c7f9ed.html">Principal Components Regression</a></li>
+  <li><a href="http://yatani.jp/teaching/doku.php?id=hcistats:fa">Factor Analysis</a></li>
+  <li><a href="https://gerardnico.com/data_mining/pca">Data mining - Principal Component (Analysis/Regression)(PCA)</a></li>
+  <li><a href="https://www.analyticsvidhya.com/blog/2016/03/practical-guide-principal-component-analysis-python/">Practical Guide to Principal Component Analysis (PCA) in R &amp; Python</a></li>
+  <li><a href="https://www.statisticshowto.datasciencecentral.com/variance-inflation-factor/">Variance Inflation Factor</a></li>
+  <li><a href="http://www.statpower.net/Content/312/R%20Stuff/Exploratory%20Factor%20Analysis%20with%20R.pdf">Exploratory Factor Analysis with R</a></li>
+  <li><a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/">Principal Component Analysis in R: prcomp vs princomp</a></li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/01/03/bootstrap/" data-toggle="tooltip" data-placement="top" title="Bootstrapping in R">
+                        Previous<br>
+                        <span>Bootstrapping in R</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/01/12/cor-dif/" data-toggle="tooltip" data-placement="top" title="Comparison of correlation coefficients">
+                        Next<br>
+                        <span>Comparison of correlation coefficients</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0011" 
+                    href="/archive/?tag=Blog"
+                    title="Blog"
+                    rel="3">Blog</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=R"
+                    title="R"
+                    rel="8">R</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=PCA"
+                    title="PCA"
+                    rel="2">PCA
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/Shsun2012">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Shsun 2022
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

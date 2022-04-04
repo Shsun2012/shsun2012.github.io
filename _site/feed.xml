@@ -3,100 +3,868 @@
   <channel>
     <title>Shsun</title>
     <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 12 Nov 2019 01:47:11 +0800</pubDate>
-    <lastBuildDate>Tue, 12 Nov 2019 01:47:11 +0800</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <link>https://shsun2012.github.io/</link>
+    <atom:link href="https://shsun2012.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 04 Apr 2022 16:07:26 +0800</pubDate>
+    <lastBuildDate>Mon, 04 Apr 2022 16:07:26 +0800</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>Set up a personal website with templates</title>
-        <description>&lt;h3 id=&quot;before-start&quot;&gt;Before start&lt;/h3&gt;
-&lt;p&gt;I was intended to write all the css and html scripts since I’ve taken related courses in college. Truth is, I have only learned the basics, some even outdated. It is also complicated enough for me to give up at the very first step. After a year, I decide to use templates and to make things easier.&lt;/p&gt;
+        <title>Hierarchical Clustering</title>
+        <description>&lt;p&gt;Cluster analysis (CA) can be classified as hierarchical and non-hierarchical. Two most popular CA techniques are introduced: hierarchical agglomerative, and k-means. Currentl I am tring to identify spatial and temporal patterns as well as impacts from local synoptic meteorology with CA and PCA.&lt;/p&gt;
 
-&lt;h3 id=&quot;bootstrap-templates&quot;&gt;Bootstrap Templates&lt;/h3&gt;
-&lt;p&gt;By using templates, I meant to implement bootstrap on my current Github website. I read some great tutorials such as &lt;a href=&quot;https://nicolas-van.github.io/bootstrap-4-github-pages/&quot;&gt;Bootstrap 4 start-up&lt;/a&gt; and also the &lt;a href=&quot;https://getbootstrap.com/docs/4.3/getting-started/introduction/&quot;&gt;official introduction to bootstrap&lt;/a&gt;. Then I came to this blog template, &lt;a href=&quot;https://github.com/BlackrockDigital/startbootstrap-clean-blog&quot;&gt;Clean Blog&lt;/a&gt;. I’ve seen many people using very similar layout, which they probably forked from this. Finally I decided to fork &lt;a href=&quot;https://huangxuan.me/&quot;&gt;Hux Blog&lt;/a&gt; which is also derived from Clean Blog but with more functions.&lt;/p&gt;
+&lt;h5 id=&quot;hierarchical-clustering&quot;&gt;Hierarchical clustering&lt;/h5&gt;
+&lt;p&gt;Hierarchical clustering algorithms in a agglomerative manner (bottom-up) is implemented as following steps:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Pre-processing observations by scaling and normalizing.&lt;/li&gt;
+  &lt;li&gt;Consider each observation as a cluster and calculate distances between clusters.&lt;/li&gt;
+  &lt;li&gt;Two clusters with minimum distances are combined and replaced by a single cluster.&lt;/li&gt;
+  &lt;li&gt;Repeat 2 and 3 steps.&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h3 id=&quot;set-up-environment&quot;&gt;Set up environment&lt;/h3&gt;
-&lt;p&gt;GitHub Pages are powered by &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/a&gt;, a blog-aware static site generator in Ruby. which can be used to maintain your website and test locally. You may need to update your ruby version and change the path for default ruby. To do this, first install rvm:&lt;/p&gt;
+&lt;p&gt;There are different ways to calculate the distances between clusters: complete-linkage, single linkage, average linkage, and centroid linkage. The dendrogram from hierarchical clustering can be used to decide number of clusters.&lt;/p&gt;
 
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;h5 id=&quot;non-hierarchical-clustering&quot;&gt;Non-hierarchical clustering&lt;/h5&gt;
+&lt;p&gt;K-means clustering aims to divide &lt;em&gt;m&lt;/em&gt; objects in &lt;em&gt;n&lt;/em&gt; dimensions into k clusters such that within-cluster sum of squares is minimized. K-means iterative clustering method is as follows:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Choose a &lt;em&gt;k&lt;/em&gt; value as initial set of &lt;em&gt;k&lt;/em&gt; centroids.&lt;/li&gt;
+  &lt;li&gt;Assign each of the objects to the cluster with nearest centroid.&lt;/li&gt;
+  &lt;li&gt;Determine the new centroids of the k clusters.&lt;/li&gt;
+  &lt;li&gt;Repeat 2 and 3 steps.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;two-stage-clustering&quot;&gt;Two-stage clustering&lt;/h5&gt;
+&lt;p&gt;Two-stage clustering is a combination of two clustering methods, where the output from the first is used as input of the second clustering. Hierarchical clustering is the first, and k-means is the second. The hierarchical relationship from the first stage is used as “seeds” in the k-means algorithm.&lt;/p&gt;
+
+&lt;p&gt;A useful package for a two-stage clustering package &lt;a href=&quot;https://github.com/jrosen48/prcr&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prcr&lt;/code&gt;&lt;/a&gt;, which is for person-centered analysis.&lt;/p&gt;
+
+&lt;h5 id=&quot;clustering-routine-in-r&quot;&gt;Clustering Routine in R&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kmeans()&lt;/code&gt; does basic k-means clustering. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hclust()&lt;/code&gt; does hierarchical aggomerative clustering. Then use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot()&lt;/code&gt; to check teh results. Basically, using agglomerative hierarchical method &lt;em&gt;hclust&lt;/em&gt; aims to merge small clusters into larger ones, which is also computationally easy and fast.&lt;/p&gt;
+
+&lt;p&gt;Using optimal partitioning method such as kmeans requires decision of how many clusters to use, as well as an initial clustering. kmeans does a random assignment of groups to start with. To set a nonrandom start can avoid this by specifying the centers of teh clusters.&lt;/p&gt;
+
+&lt;p&gt;To determine the number of clusters, we can use pseudo-F test. Psuedo F describes the ratio of between cluster variance to within-cluster variance. Before using kmeans, we can use the elbow plot to check how many clusters we can use. The following code is what I use to find clusters:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
-&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.gem/ruby/X.X.0/bin:&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;km.out = kmeans(PCA$PC.data[,1:5], centers = ncluster, nstart = 50, iter.max = 100)
+km.cluster = km.out$cluster
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;To avoid the error that kmeans not converge in 10 iterations, we can set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iter.max&lt;/code&gt; to a larger number for it to converge.&lt;/p&gt;
 
-&lt;p&gt;Install Jekyll with gem.&lt;/p&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bundler jekyll
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h6 id=&quot;reference&quot;&gt;Reference&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://doi.org/10.1016/j.apr.2019.09.009&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 12 Mar 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/03/12/hc/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/03/12/hc/</guid>
+        
+        <category>R</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Weather map explained</title>
+        <description>&lt;p&gt;When comes to a weather map likes this, how to understand it? What’s behind each weather pattern?
+&lt;img src=&quot;/img/weather.jpg&quot; alt=&quot;map&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;To start, use bundler (this will generate a Gemfile):&lt;/p&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;h5 id=&quot;cold-and-warm-front&quot;&gt;Cold and Warm Front&lt;/h5&gt;
+&lt;p&gt;A cold front usually brings rain and temperature drop. Cold fronts can move up to twice as fast and produce sharper weather changes than warm fronts, since cold air is denser than warm air. Cold fronts would also lift warmer air which cause the formation of a narrow line of showers and thunderstorms when moisture is present. This upward motion causes lowered pressure along the cold front.&lt;/p&gt;
+
+&lt;p&gt;A stationary front is the boundary between warm and cold air masses. Neither air mass is strong enough to move another. A stationary front can be pushed back and forth over a given area for days.&lt;/p&gt;
+
+&lt;p&gt;As warm air rises above the cold air in a warm front, water vapor condenses forming high clouds. Light precipitation can fall on areas as warm front passes. Air between a cold and a warm front is called a warm sector. When cold front catches up the warm front, it becomes an occluded front.&lt;/p&gt;
+
+&lt;p&gt;Warm front is easy to identify as the leading edge of high clouds approaching on the horrizon. It can leave clouds behind following by a cold front, which is hard to spot. Deep cloud layers form as the warm moist air is forced to rise and cool. These cloud layers produce lots of rain often in bands, which tend to be quite narrow with heavy rains and sometimes thunderstorms. When a cold front passes there is often a dramatic clearance with blue sky and sunshine. Temperatures fall at first but they may rise again when sunshine appears. This sunny weather doesn’t always last long because when cold air is warmed, it will rise or convect and produce shallow rain clouds.&lt;/p&gt;
+
+&lt;h5 id=&quot;occluded-front&quot;&gt;Occluded Front&lt;/h5&gt;
+&lt;p&gt;Occluded front is formed when a cold front overtakes a warm front, which is called cold occlusion. In a cold occlusion, the air mass overtaking the warm front is cooler than the cool air ahead of the warm front and plows upder both air masses; in a warm occlusion, the air mass overaking the warm front is warmer than the cold air ahead and rides over the colder air mass while lifting the warm air. Occluded fronts usually from around mature low pressure areas almost to the north where two fronts meet.&lt;/p&gt;
+
+&lt;h5 id=&quot;trough-and-ridge&quot;&gt;Trough and Ridge&lt;/h5&gt;
+&lt;p&gt;A trough is an elongated region of relative &lt;strong&gt;low&lt;/strong&gt; atmospheric pressure, ofen associated with fronts. In weather maps, a trough can be marked as a dashed line. Troughs can also be identified as an extension of isobars away from a low pressure center. Air usually rises to the east of the trough, favorable for the development of precipitation. The wind around a trough in the Northern Hemisphere will blow &lt;strong&gt;counterclockwise&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A ridge is the opposite of troughs. Air under a rige sinks which is not conducive for the development of precipitation. In the Northern Hemisphere, winds will blow &lt;strong&gt;clockwise&lt;/strong&gt; around a high.&lt;/p&gt;
+
+&lt;p&gt;In general, troughs are behind low pressure areas while ridges are above high pressure areas in the NH. Low pressure system (marked as L) is usually related with rain, wind, and clouds.&lt;/p&gt;
+
+&lt;h6 id=&quot;reference&quot;&gt;Reference&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.k3jae.com/wxfrontsexplained.php&quot;&gt;Weather Fronts explained&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.weatherops.com/what-are-troughs-and-ridges&quot;&gt;What are troughs and ridges&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=G7Ewqm0YHUI&quot;&gt;What are weather fronts&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 17 Feb 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/02/17/weathermap/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/02/17/weathermap/</guid>
+        
+        <category>Blog</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Quantile regression (QR)</title>
+        <description>&lt;p&gt;Ordinary linear regression assumes a constant variance for the response of dependent variable (DV). It answers “How does the conditional mean of Y depend on the covariates X?”. QR can model the conditional distribution of the response can vary with independent variables (IV), which gives you insights about extreme conditions. QR calculates the conditional mean of Y depend on covariates X at each quantile of the conditional distribution.&lt;/p&gt;
+
+&lt;p&gt;difference between QR and standard linear regression&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Linear regression&lt;/th&gt;
+      &lt;th&gt;Quantile Regression&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Predict conditional mean&lt;/td&gt;
+      &lt;td&gt;predict conditional distribution&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Applies with limited n&lt;/td&gt;
+      &lt;td&gt;Needs sufficient data in tails&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Assumes normality&lt;/td&gt;
+      &lt;td&gt;Distribution agnostic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sensitive to outliers&lt;/td&gt;
+      &lt;td&gt;Robust to outliers&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Computationally inexpensive&lt;/td&gt;
+      &lt;td&gt;Computationally intensive&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h5 id=&quot;test-whether-two-qr-coefficients-are-different&quot;&gt;Test whether two QR coefficients are different&lt;/h5&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;bundle init
-&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;bundle add jekyll
-&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;Qreg25=rq(Y~X, tau=0.25)
+Qreg75=rq(Y~X, tau=0.75)
+anova(Qreg25, Qreg75)
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Two major issues I’ve encountered when jekyll failed are ruby version and xcode version. The xcode issue (also outdated gcc version) is solved in &lt;a href=&quot;https://github.com/juthilo/run-jekyll-on-windows/issues/34&quot;&gt;this solution thread&lt;/a&gt; by:&lt;/p&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem sources &lt;span class=&quot;nt&quot;&gt;--remove&lt;/span&gt; https://rubygems.org/
-&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem sources &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; http://rubygems.org/
-&lt;span class=&quot;gp&quot;&gt;~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll
+
+&lt;h5 id=&quot;run-several-qr&quot;&gt;Run several QR&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;QR=rq(Y~X, tau=seq(0.2, 0.8, by=0.1))
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;start-blogging&quot;&gt;Start blogging&lt;/h3&gt;
-&lt;p&gt;After setting up the website, now it’s time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier.&lt;/p&gt;
 
-&lt;h3 id=&quot;add-emojis-smiley&quot;&gt;Add emojis :smiley:&lt;/h3&gt;
+&lt;h6 id=&quot;reference&quot;&gt;Reference&lt;/h6&gt;
 
-&lt;p&gt;A issue caused by img settings in css files. A couple of lines needed for using &lt;a href=&quot;https://github.com/jekyll/jemoji&quot;&gt;&lt;em&gt;Jemoji&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;First update sheetstyle file to use inline (if default is block) for img.emoji. Then update min.css file.
-    &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rstudio-pubs-static.s3.amazonaws.com/152505_49d1881e3fe64f0bad072282c36a6ca5.html&quot;&gt;Three things you should know about quantile regresson&lt;/a&gt;
+2.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 06 Feb 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/02/06/qr/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/02/06/qr/</guid>
+        
+        <category>R</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>MLR</title>
+        <description>&lt;p&gt;Multiple linear regression (MLR) is a statistic technique which uses some &lt;strong&gt;independent variables&lt;/strong&gt; (IV) to predict a &lt;strong&gt;dependent variable&lt;/strong&gt; (DV). Multiple regression is the extension of &lt;strong&gt;ordinary least-squares (OLS) regression&lt;/strong&gt; that involves more than one explanatory variable.&lt;/p&gt;
+
+&lt;h4 id=&quot;overfitting-and-multicollinearity&quot;&gt;Overfitting and Multicollinearity&lt;/h4&gt;
+&lt;p&gt;Pre-work is needed to prevent overfitting and multicollinearity. To add more IV can explain more variation, but can lead to &lt;strong&gt;overfitting&lt;/strong&gt;. Not only the independent variables potentially related to the dependent variable (DV), they are also potentially related to each other, which is called &lt;strong&gt;multicollinearity&lt;/strong&gt;. The ideal is for all of the independent variables to be correlated with the dependent variable but NOT with each other.&lt;br /&gt;
+First, we should check the relationship between each IV and the DV using scatterplots and correlations. Then check the relatiionships among the IVs using scatterplots and correlations. The non-redundant IVs can be used to find the best fitting model.&lt;/p&gt;
+
+&lt;h4 id=&quot;multiple-linear-regression&quot;&gt;Multiple Linear Regression&lt;/h4&gt;
+&lt;p&gt;Multiple regression model:  &lt;img src=&quot;https://latex.codecogs.com/gif.latex?y&amp;space;=&amp;space;\beta&amp;space;_{0}&amp;space;&amp;plus;&amp;space;\beta&amp;space;_{1}x_{1}&amp;space;&amp;plus;&amp;space;\beta&amp;space;_{2}&amp;space;x_{2}&amp;plus;&amp;space;...&amp;space;&amp;plus;&amp;space;\beta&amp;space;_{p}x_{p}&amp;space;&amp;plus;&amp;space;\epsilon&quot; alt=&quot;equation&quot; /&gt;&lt;br /&gt;
+Multiple regression equation:![equation](https://latex.codecogs.com/gif.latex?E\left&amp;amp;space;(&amp;amp;space;y&amp;amp;space;\right&amp;amp;space;&amp;amp;space;=&amp;amp;space;\beta&amp;amp;space;&lt;em&gt;{0}&amp;amp;space;&amp;amp;plus;&amp;amp;space;\beta&amp;amp;space;&lt;/em&gt;{1}x_{1}&amp;amp;space;&amp;amp;plus;&amp;amp;space;\beta&amp;amp;space;&lt;em&gt;{2}&amp;amp;space;x&lt;/em&gt;{2}&amp;amp;plus;&amp;amp;space;…&amp;amp;space;&amp;amp;plus;&amp;amp;space;\beta&amp;amp;space;&lt;em&gt;{p}x&lt;/em&gt;{p})&lt;br /&gt;
+Estimated multiple regression equation:  &lt;img src=&quot;https://latex.codecogs.com/gif.latex?\hat{y}=b&amp;space;_{0}&amp;space;&amp;plus;b_{1}x_{1}&amp;space;&amp;plus;&amp;space;b_{2}&amp;space;x_{2}&amp;plus;&amp;space;...&amp;space;&amp;plus;&amp;space;b&amp;space;_{p}x_{p}&quot; alt=&quot;equation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each coefficient is estimated change in y corresponding to one unit change in a variable, while all other variables are held constant.&lt;/p&gt;
+
+&lt;h4 id=&quot;model-selection&quot;&gt;Model Selection&lt;/h4&gt;
+&lt;p&gt;Two types of MLR model selection: forward selection, backward selection. Forward Selection starts with the linear regression model with the most significant IV. Then we add the remaining IV one at a time. The process is stopped when no significant extensions are possible. Backward selection starts with a full model which includes all IVs. We remove the most insignificant IV one at a time. We stop when all p values are significant.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; summary(lm(Y ~ X1 + X2 + X3 + X4 + X5 + X6 + X7 + X8))
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We can do VIF (Variance inflation factor) with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vif&lt;/code&gt; function in package &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;car&lt;/code&gt; to check multicollinearity.&lt;/p&gt;
+
+&lt;p&gt;The coefficient of determination (R-squared) is a statistical metric that is used to measure how much of the variation in outcome can be explained by the variation in the independent variables. R-squared always increases as more predictors are added to the MLR model even though the predictors may not be related to the outcome variable.&lt;/p&gt;
+
+&lt;h4 id=&quot;relative-importance-of-variables&quot;&gt;Relative Importance of Variables&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/martinctc/rwa&quot;&gt;Relative weight analysis (rwa)&lt;/a&gt; in R provides a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rwa()&lt;/code&gt; function to calculate relative importance of predictors. Reference can be found &lt;a href=&quot;https://link.springer.com/content/pdf/10.1007%2Fs10869-014-9351-z.pdf&quot;&gt;here&lt;/a&gt;. Another method is &lt;strong&gt;Dominance Analysis (DA)&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;DA defines importance in a unique way by comparing pairs of predictors (from a selected model) across all subset models to make the determination of relative importance or dominance (Azen et al., 2009). In ordinary least squares regression with p predictors and a continous outcome, DA defines the additional contribution of any given predictor to a given subset model as the change in R2 when the predictor is added to the model. DA considers one predictor to completely dominate another if its additional contribution to every possible subset model is greater than that of the other predictor.&lt;/p&gt;
+
+&lt;p&gt;We can use the &lt;a href=&quot;https://rdrr.io/github/clbustos/dominanceAnalysis/man/dominanceanalysis-package.html&quot;&gt;dominanceanalysis&lt;/a&gt; package in R. DA relies on the R-squared values of all possible combinations of predictors and measures relative importance by doing pairwise comparison of all predictors in the model as they relate to an outcome variable. DA is used to determine if a predctor is more significant than other predictors. There are three types of dominance criteria: complete, conditional, and general. These three criteria works in a hierachical way: complete dominance implies conditional dominance, conditional dominance implies general dominance. It is recommended to use complete dominance. To evaluate the robustness of DA results, we can use bootstrap analysis with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bootDominanceAnalysis&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h6 id=&quot;reference&quot;&gt;Reference&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=dQNpSa-bq4M&quot;&gt;Multiple Linear Regression, the very basics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://link.springer.com/content/pdf/10.1007%2Fs10869-014-9351-z.pdf&quot;&gt;RWA Web: A Free, Comprehensive, Web-Based, and User-Friendly Tool for Relative Weight Analyses&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.investopedia.com/terms/m/mlr.asp&quot;&gt;MLR definition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4557879/pdf/nihms713005.pdf&quot;&gt;A Dominance Analysis Approach to Determining Predictor Importance in Third, Seventh, and Tenth Grade Reading Comprehension Skills&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jstor.org/stable/40263507?seq=1#metadata_info_tab_contents&quot;&gt;Using Dominace Analysis to Determine Predictor Importance in Logistic Regression&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 31 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/01/31/mlr/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/01/31/mlr/</guid>
+        
+        <category>R</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>anova</title>
+        <description>&lt;p&gt;ANOVA table gives the significance of the overall model. ANOVA is a statistical process first derived by R. A. Fisher in 1925.&lt;/p&gt;
+
+&lt;p&gt;The anova() function call returns an &lt;a href=&quot;https://www.itl.nist.gov/div898/handbook/prc/section4/prc433.htm&quot;&gt;ANOVA table&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
 5
 6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;img.emoji {
-  display: inline;
-  height: 1em;
-  width: 1em;
-  margin-bottom: 0.25em;
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install jemoji:
-    &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;go&quot;&gt;gem install jemoji
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Modify Gemfile (or bundel add jemoji)
-    &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;go&quot;&gt;gem 'jemoji'
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Add jemoji in config.yml:
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;plugins:  - jemoji
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;Some cheat sheet for emojis &lt;a href=&quot;https://www.webfx.com/tools/emoji-cheat-sheet/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Enjoy:pig:!&lt;/li&gt;
-&lt;/ul&gt;
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&amp;gt; PC.reg = lm(Y.n ~ -1 + PC1 + PC2 + PC3 + PC4 + PC5, na.action=na.exclude)
+&amp;gt; anova(PC.reg)
+Analysis of Variance Table
+
+Response: Y.n
+           Df Sum Sq Mean Sq F value    Pr(&amp;gt;F)    
+PC1         1  64.47  64.472 78.6426 &amp;lt; 2.2e-16 ***
+PC2         1   7.56   7.556  9.2169 0.0024664 **
+PC3         1   4.44   4.436  5.4110 0.0202300 *  
+PC4         1  81.74  81.743 99.7092 &amp;lt; 2.2e-16 ***
+PC5         1   9.23   9.227 11.2549 0.0008271 ***
+Residuals 907 743.57   0.820                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The function confint is used to calculate confidence intervals on the treatment parameters, by default 95% confidence intervals.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&amp;gt; confint(PC.reg)
+         2.5 %    97.5 %
+PC1 0.12730735 0.1996705
+PC2 0.02211786 0.1030011
+PC3 0.01113563 0.1313582
+PC4 0.26906828 0.4007092
+PC5 0.05378127 0.2054072
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There are three types of sum of squares in anova output. Consider a model that includes two factors A and B; there are two main effects and an interaction, AB. The full model is represented by SS(A, B, AB). The influence of factors and interactions can be tested by examining difference between models. For example, to test the interaction effect, we can do a F-test of model SS(A, B, AB) and model SS(A, B)&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;SS(AB | A, B) = SS(A, B, AB) – SS(A, B)
+SS(A | B, AB) = SS(A, B, AB) – SS(B, AB)
+SS(B | A, AB) = SS(A, B, AB) – SS(A, AB)
+SS(A | B) = SS(A, B) – SS(B)
+SS(B | A) = SS(A, B) – SS(A)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;The notation shows the incremental differences in sums of squares, for example SS(AB&lt;/td&gt;
+      &lt;td&gt;A, B) represents “the sum of squares for interaction after the main effects”, and SS(A&lt;/td&gt;
+      &lt;td&gt;B) is “the sum of squares for the A main effect after the B main effect and ignoring interactions”.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h6 id=&quot;reference&quot;&gt;Reference&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mcfromnz.wordpress.com/2011/03/02/anova-type-iiiiii-ss-explained/&quot;&gt;Anova - Type I/II/III SS explained&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
-        <pubDate>Mon, 11 Nov 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/11/11/first-blog/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/11/11/first-blog/</guid>
+        <pubDate>Thu, 16 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/01/16/anova/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/01/16/anova/</guid>
         
-        <category>Blog</category>
+        <category>R</category>
         
-        <category>Jekyll</category>
         
-        <category>Bootstrap</category>
+      </item>
+    
+      <item>
+        <title>PCA</title>
+        <description>&lt;p&gt;A simple way to do PCA in R:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pc = princomp(X)
+plot(pc)
+summary(pc)
+loadings(pc)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;pca-in-r&quot;&gt;PCA in R&lt;/h3&gt;
+&lt;p&gt;An example with a demo dataset &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;decathlon2&lt;/code&gt; as described &lt;a href=&quot;http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first column is individual names. To start with, we choose first 10 variables and 23 individuals: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;decathlon2.active&lt;/code&gt;. Here we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prcomp&lt;/code&gt; to do pca:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;library(factoextra)
+data(decathlon2)
+decathlon2.active &amp;lt;- decathlon2[1:23, 1:10]
+res.pca = prcomp(decathlon2.active, scale = T)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Then we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fviz_eig&lt;/code&gt; to visualize eigenvalues, the percentage of variance explained by each principal component. Previously we calculate percentage of variance using standard deviations returned by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prcomp&lt;/code&gt;, which produces same barplot as fviz_eig. Then we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fviz_contrib&lt;/code&gt; to plot the contributions of each variable to PCs.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;fviz_eig(res.pca, addlabels = T)
+test = round(res.pca$sdev^2/sum(res.pca$sdev^2)*100, 1)    # to calculate eigenvalues
+barplot(test)
+fviz_contrib(res.pca, choice = 'var', axes = 1)
+fviz_contrib(res.pca, choice = 'var', axes = 2)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We can also assess PCA results by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_eigenvalue&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_pca_var&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_pca_ind&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;# Eigenvalues
+eig.val &amp;lt;- get_eigenvalue(res.pca)
+eig.val
+
+        eigenvalue variance.percent cumulative.variance.percent
+Dim.1   4.1242133        41.242133                    41.24213
+Dim.2   1.8385309        18.385309                    59.62744
+Dim.3   1.2391403        12.391403                    72.01885
+Dim.4   0.8194402         8.194402                    80.21325
+Dim.5   0.7015528         7.015528                    87.22878
+Dim.6   0.4228828         4.228828                    91.45760
+Dim.7   0.3025817         3.025817                    94.48342
+Dim.8   0.2744700         2.744700                    97.22812
+Dim.9   0.1552169         1.552169                    98.78029
+Dim.10  0.1219710         1.219710                   100.00000
+
+# Results for Variables
+res.var &amp;lt;- get_pca_var(res.pca)
+res.var$coord          # Coordinates
+res.var$contrib        # Contributions to the PCs
+res.var$cos2           # Quality of representation
+
+# Results for individuals
+res.ind &amp;lt;- get_pca_ind(res.pca)
+res.ind$coord          # Coordinates
+res.ind$contrib        # Contributions to the PCs
+res.ind$cos2           # Quality of representation
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_eigenvalue&lt;/code&gt; gives eigenvalues (component variances) and the proportion of overall variance explained. At this step, you can decide on the number of first PCs you want to retain.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_pca_var&lt;/code&gt; gives eigenvectors (cosines of rotation fo variables into components). This step also computes loadings. We may skip if we don’t need to interpret PCs. Loadings are eigenvectors normalized to respective eigenvalues: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;loading = eigenvector * sqrt(eigenvalue)&lt;/code&gt;. Loadings are the covariance between variables and components.&lt;/p&gt;
+
+&lt;p&gt;More notes about eigenvalues. In PCA, covariance matrix is split into scale (eigenvalues) and direction (eigenvectors) part. &lt;strong&gt;Eigenvectors&lt;/strong&gt; are coefficients of orthogonal transformation, and they are unit-scaled loadings. &lt;strong&gt;Loadings&lt;/strong&gt; are the covariances/correlations between the original variables and the unit-scaled components. &lt;strong&gt;Eigenvalues&lt;/strong&gt; are the variances explained by PCs.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;# Data for the supplementary individuals
+ind.sup &amp;lt;- decathlon2[24:27, 1:10]
+ind.sup[, 1:6]
+ind.sup.coord &amp;lt;- predict(res.pca, newdata = ind.sup)
+ind.sup.coord[, 1:4]
+
+fviz_pca_ind(res.pca,
+             col.ind = &quot;cos2&quot;, # Color by the quality of representation
+             gradient.cols = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;),
+             repel = TRUE     # Avoid text overlapping
+)
+
+groups &amp;lt;- as.factor(decathlon2$Competition[1:23])  ## color individuals by groups
+fviz_pca_ind(res.pca,
+             col.ind = groups, # color by groups
+             palette = c(&quot;#00AFBB&quot;,  &quot;#FC4E07&quot;),
+             addEllipses = TRUE, # Concentration ellipses
+             ellipse.type = &quot;confidence&quot;,
+             legend.title = &quot;Groups&quot;,
+             repel = TRUE
+)
+
+fviz_pca_var(res.pca,
+             col.var = &quot;contrib&quot;, # Color by contributions to the PC
+             gradient.cols = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;),
+             repel = TRUE     # Avoid text overlapping
+)
+
+fviz_pca_biplot(res.pca, repel = TRUE,
+                col.var = &quot;#2E9FDF&quot;, # Variables color
+                col.ind = &quot;#696969&quot;  # Individuals color
+)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Quick notes!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;maximize the sum of squares of distance (SS)&lt;/li&gt;
+  &lt;li&gt;PC1 has a slope of 0.25 means for every 4 units along x axis (original), we go up 1 unit  along y axis (linear combination of x and y)&lt;/li&gt;
+  &lt;li&gt;SVD: singular value decomposition&lt;/li&gt;
+  &lt;li&gt;SS(distances for PC1) = &lt;strong&gt;Eigenvalue&lt;/strong&gt; for PC1&lt;/li&gt;
+  &lt;li&gt;squared(Eigenvalue for PC1) = &lt;strong&gt;singular value&lt;/strong&gt; for PC1&lt;/li&gt;
+  &lt;li&gt;SS(distances for PC1)/(n-1) = Variation for PC1&lt;/li&gt;
+  &lt;li&gt;SS(distances for PC2)/(n-1) = Variation for PC2&lt;/li&gt;
+  &lt;li&gt;total variation around both PC1 and PC2 =  Variation for PC1 + Variation for PC2&lt;/li&gt;
+  &lt;li&gt;PC1 accounts for: Variation for PC1 / total variation around both PCs&lt;/li&gt;
+  &lt;li&gt;Sum of squares total = Sum of squares due to regression + sum of squares error(residual) (SST = SSR + SSE), &lt;a href=&quot;https://365datascience.com/sum-squares/&quot;&gt;graph explain&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;residual DF: sample size - regressor number(variables)&lt;/li&gt;
+  &lt;li&gt;regression DF: regressor number - 1&lt;/li&gt;
+  &lt;li&gt;mean square = sum of squares/DF&lt;/li&gt;
+  &lt;li&gt;total DF = residual DF + regression DF&lt;/li&gt;
+  &lt;li&gt;F score = mean square of regression/mean square of residual; F(2,7) = 10 -&amp;gt; 2 is numerator, 7 is denominator&lt;/li&gt;
+  &lt;li&gt;T score = estimated coefficients/standard error&lt;/li&gt;
+  &lt;li&gt;Z score = observation-mean/standard deviation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;reference&quot;&gt;Reference&lt;/h6&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stats.stackexchange.com/questions/126885/methods-to-compute-factor-scores-and-what-is-the-score-coefficient-matrix-in&quot;&gt;Score coefficient in PCA and factor analysis&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stats.stackexchange.com/questions/102882/steps-done-in-factor-analysis-compared-to-steps-done-in-pca/102999#102999&quot;&gt;Steps done in factor analysis compared to steps done in PCA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stats.stackexchange.com/questions/62677/pca-on-correlation-or-covariance-does-pca-on-correlation-ever-make-sense&quot;&gt;PCA on correlation or covariance: does PCA on correlation ever make sense&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UpbT_heNiBs&quot;&gt;ANOVA table&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 14 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/01/14/pca/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/01/14/pca/</guid>
+        
+        <category>R</category>
+        
+        <category>PCA</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Comparison of correlation coefficients</title>
+        <description>&lt;p&gt;Z-test is a statistical test used to determine whether two population means are different. Using the &lt;a href=&quot;https://en.wikipedia.org/wiki/Fisher_transformation&quot;&gt;Fisher transformation&lt;/a&gt;, we can test whether two correlation coefficients are significantly different. Z value is calculated as: &lt;br /&gt;
+&lt;img src=&quot;https://latex.codecogs.com/gif.latex?z%3D%5Cfrac%7B1%7D%7B2%7D%5Cln%20%5Cleft%20%28%20%5Cfrac%7B1&amp;plus;r%7D%7B1-r%7D%20%5Cright%20%29&quot; alt=&quot;equations&quot; /&gt;&lt;br /&gt;
+Here’s what I wrote for compare correlation coefficients.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;r1 = cor1$estimate
+r2 = cor2$estimate
+
+if(abs(r1) &amp;lt; r.lim | abs(r2) &amp;lt; r.lim) next
+
+n1 = sum(complete.cases(x1, x2))
+n2 = sum(complete.cases(y1, y2))
+
+# fisher transformation
+fisher = ((0.5*log((1+r1)/(1-r1)))-(0.5*log((1+r2)/(1-r2))))/((1/(n1-3))+(1/(n2-3)))^0.5
+
+p.value = (2*(1-pnorm(abs(fisher))))
+if(p.value &amp;lt; plim){
+  cor.dif[ilon,ilat] = r2 - r1
+}
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cocor&lt;/code&gt; R package can also be used to compare two correlation coefficients.&lt;/p&gt;
+
+&lt;h6 id=&quot;how-to-insert-latex-equations-in-markdown-pages&quot;&gt;How to insert LaTeX equations in markdown pages&lt;/h6&gt;
+&lt;p&gt;Take your latex equation and go to http://www.codecogs.com/latex/eqneditor.php, copy the URL and paste that in your markdown script:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;![equation](http://latex.codecogs.com/gif.latex)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h6 id=&quot;how-to-draw-diagrams-in-markdown&quot;&gt;How to draw diagrams in markdown&lt;/h6&gt;
+&lt;p&gt;&lt;a href=&quot;https://support.typora.io/Draw-Diagrams-With-Markdown/&quot;&gt;Draw diagrams with Markdown&lt;/a&gt;
+&lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet&quot;&gt;Markdown cheatsheet&lt;/a&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;reference&quot;&gt;Reference&lt;/h5&gt;
+&lt;p&gt;Fisher, R. A. (1921). On the Probable Error of a Coefficient of Correlation
+Diedenhofen, B. &amp;amp; Musch, J. (2015). cocor: A Comprehensive Solution for the Statistical Comparison of Correlations. PLoS ONE, 10(4): e0121945. doi:10.1371/journal.pone.0121945
+https://stackoverflow.com/questions/35498525/latex-rendering-in-readme-md-on-github&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/01/12/cor-dif/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/01/12/cor-dif/</guid>
+        
+        <category>R</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Basic statistics with R</title>
+        <description>&lt;p&gt;Currently I am analysing meteorological impacts on stomatal conductance as well as how these interactions would affect surface ozone contrations. Previously I listed many variables and tried to find the patterns, using MERRA2 meteorology and surface ozone concentrations to analyse meteorology impacts on ozone in US. Given MERRA2 meteorology, SPEI data, surface, ozone concentrations, use following steps to practice basic data analysis in R:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Calculate the moving average of meteorological variables and get the deseasonalized daily values.&lt;/li&gt;
+  &lt;li&gt;Do regression between ozone and meteorology.&lt;/li&gt;
+  &lt;li&gt;Calculate PCA for each grid&lt;/li&gt;
+  &lt;li&gt;Plot maps of PC with ggplot&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;linear-regression&quot;&gt;Linear regression&lt;/h5&gt;
+&lt;p&gt;Pre-work before regression or correlation is important. The first two steps include calculating moving averages (MA) and correlations. Moving averages can smooth out the noise of random outliers and emphasize long-term trends. In this case, we subtract MA from daily values to remove the long-term trend and focus on deseasonalized day-to-day variablities. Normalization of variables is also necessary, because the original variables may have different scales. Performing PCA on un-normalized variables will lead to insanely large loadings for variables with high variance. In turn, this would lead to dependence of a PC on the variable with high variance. This can easily be done in R.&lt;/p&gt;
+
+&lt;p&gt;Then we use the deseasonalized daily values to calculate correlations. Now we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glm&lt;/code&gt; for regression analysis.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm&lt;/code&gt; fits models with the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Y = Xb + e&lt;/code&gt;, while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glm&lt;/code&gt; fits models with the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f(Y) = Xb + e&lt;/code&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glm&lt;/code&gt; generalizes the linear model into the expotential family, while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm&lt;/code&gt; assumes data following a specific distribution: Normal or Gauss. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm.beta&lt;/code&gt; adds the standarlized regression coefficients to objects created by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;reg = lm(O3 ~ T2M + QV2M + PRECTOT + GWETROOT + SLP + WIND + SWGDN + CLDTOT, na.action=na.exclude)
+reg.st = lm.beta(reg)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;model-selection&quot;&gt;Model selection&lt;/h4&gt;
+&lt;h6 id=&quot;forward-selection&quot;&gt;Forward selection&lt;/h6&gt;
+&lt;p&gt;First we start with the linear regression model &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm&lt;/code&gt; with the most significant independent variable. Then we extend the model with the remaining independent variables one at a time. We stop when there is no significant extensions anymore.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;summary(lm(O3 ~ T2M + WIND))
+summary(lm(O3 ~ T2M + WIND + QV2M))  # add variable and check p-value
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h6 id=&quot;backward-selection&quot;&gt;Backward selection&lt;/h6&gt;
+&lt;p&gt;Start with the full modeland remove the most insignificant independent variable. Finally we stop when all p values are significant.&lt;/p&gt;
+
+&lt;h4 id=&quot;pca-analysis&quot;&gt;PCA analysis&lt;/h4&gt;
+&lt;p&gt;The fundamentals of PCA have been discussed over and over again. The aim of PCA is to create a new set of uncorrelated variables that are a linear combination of the initial variables and explain as much of the initial variation as possible. When analysing meteorological variables, we always use PCA to extract the uncorrelated principal components as original meteorolgical factors are usually correlated with each other. Basically, PC1 is a linear combination of orignial predictor variables which captures the maximum variance in the dataset. It determines the direction of highest variablity in the data. PC2 is also a linear combination of original predictors which captures the remaining variance in the dataset and is uncorrelated with PC1.&lt;/p&gt;
+
+&lt;p&gt;There are two general methods to perform PCA in R:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;princomp()&lt;/code&gt;, the spectral decomposition approach which examines the covariances/correlations between variables&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prcomp()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PCA()&lt;/code&gt;, the singular value decomposition (SVD)
+The simplified format of these two functions are:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;prcomp(x, scale = FALSE) # x is a numeric matrix or data frame; scale is a logical value indicating whether the variables should be scaled to have unit variance before the analysis takes place
+princomp(x, cor = FALSE, scores = TRUE) # cor is a logical value, if TRUE, the data will be centered and scaled before analysis;
+# scores is a logical value, if TRUE, the coordinates on each principal component are calculated.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;The output elements returned by the functions prcomp and princomp:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;prcomp() name&lt;/th&gt;
+      &lt;th&gt;princomp() name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sdev&lt;/td&gt;
+      &lt;td&gt;sdev&lt;/td&gt;
+      &lt;td&gt;the standard deviations of principal components&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rotation&lt;/td&gt;
+      &lt;td&gt;loadings&lt;/td&gt;
+      &lt;td&gt;the matrix of variable loadings (columns are eigenvectors)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;center&lt;/td&gt;
+      &lt;td&gt;center&lt;/td&gt;
+      &lt;td&gt;the variable means (means that were substracted)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;scale&lt;/td&gt;
+      &lt;td&gt;scale&lt;/td&gt;
+      &lt;td&gt;the variable standard deviations (the scaling applied to each variable)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;scores&lt;/td&gt;
+      &lt;td&gt;the coordinates of the individuals (observations) on the principal components&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here we focus on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prcomp()&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pca = prcomp(~X.data, scale=TRUE, na.action=na.exclude)
+PC.sd = pca$sdev
+PC.rot = pca$rotation
+PC.data = pca$x
+pca.var.per = round(pca.var/sum(pca.var)*100, 1)
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;By default, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prcomp()&lt;/code&gt; expects samples (observations) to be rows and the variables to be columns. returns &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sdev&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rotation&lt;/code&gt;. &lt;strong&gt;x&lt;/strong&gt; contains the PCs for grawing a graph. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot(pca$x[,1], pca$x[,2])&lt;/code&gt; can be used to plot for the first two PCs. The x and y axis tells about he percentage of the variatioin in the original data that PC1 and PC2 account for. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pca$rotation&lt;/code&gt; record loading scores for each PC. Loading scores can be used to determine which variables have the largest effects. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pca$rotation[,1]&lt;/code&gt; is the loading scores for PC1.One of the disadventage of PC is interpreting the PCs. When the PC1 is highly correlated with all variables, we can say it summarizes the data well and that instead of using the meteorological variables to make prediction, we can just use PC1. If two meteorological variables are correlated with each other, perhaps usign one new variable (i.e. PC1) can summarize both variables.&lt;/p&gt;
+
+&lt;h5 id=&quot;pcr-analysis&quot;&gt;PCR analysis&lt;/h5&gt;
+&lt;p&gt;We also want to know whether the new PCs can predict the phenomena well after PCA analysis. We use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lm()&lt;/code&gt; to see if PC1 ~ PC4 can predict Y.n (i.e., ozone) well.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;PC.reg = lm(Y.n ~ -1 + PC1 + PC2 + PC3 + PC4, na.action = na.exclude)
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;To see how well this model can predict ozone, we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fitted()&lt;/code&gt; function to see the prediction.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;fitted(PC.reg)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;factor-analysis&quot;&gt;Factor analysis&lt;/h5&gt;
+&lt;p&gt;The intuition of PCA is to find new combination of variables which form larger variances, while FA is to find hidden variables which affect your observed variables by looking at the correlation. FA in R is easy to dy by a function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;factanal()&lt;/code&gt;, which fits a common factor model by the method of maximum likelihood. Note that the function can analyze either raw data or a correlation or covariance matrix. To begin with , here I use SynFlux data combined with FLUXNET meteorology and SPEI data with a 2 factor model:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ml = df[c('liq_precip','wind','vpd','qv2m','t2m','swgdn','gwetroot','cldtot','spei')]
+factanal(ml, factor = 2)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Then we get output like this:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;Call:
+factanal(x = ml, factors = 2)
+
+Uniquenesses:
+liq_precip       wind        vpd       qv2m        t2m      swgdn   gwetroot     cldtot       spei
+     0.983      0.999      0.005      0.005      0.005      0.790      0.876      0.723      1.000
+
+Loadings:
+           Factor1 Factor2
+liq_precip  0.125         
+wind                      
+vpd                 0.998
+qv2m        0.993         
+t2m         0.799   0.598
+swgdn       0.136   0.437
+gwetroot   -0.182  -0.301
+cldtot     -0.377  -0.367
+spei                      
+
+               Factor1 Factor2
+SS loadings      1.834   1.782
+Proportion Var   0.204   0.198
+Cumulative Var   0.204   0.402
+
+Test of the hypothesis that 2 factors are sufficient.
+The chi square statistic is 2236.75 on 19 degrees of freedom.
+The p-value is 0
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;At the bottom of the output, we can see that the significance level is very small, which indicates that the hypothesis of perfect model fit is reject.&lt;/p&gt;
+
+&lt;p&gt;The model gets improved if you have more variables, which shows the trade-off between the number of variables and the accuracy of the model. Similar to PCA, we can look at the cumulative portion of variance, and if that reaches some numbers, we can stop adding more factors. The Kaiser rule is to discard components whose eigenvalues are below 1.0.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ev = eigen(cor(data))
+ev$values
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;By looking at how many values are over 1.0, we can decide the number of factors. There is no definitive way to determine the number of factors.&lt;/p&gt;
+
+&lt;p&gt;Another method is to use variance inflation factor (VIF,&lt;a href=&quot;https://en.wikipedia.org/wiki/Variance_inflation_factor&quot;&gt;wiki&lt;/a&gt;). VIF measures how much the variance of an estimated regression coefficient increases if your predictors are correlated, which detects multicollinearity in regression analysis: &lt;br /&gt;
+&lt;img src=&quot;https://latex.codecogs.com/gif.latex?VIF%3D%5Cfrac%7B1%7D%7B1-R%5E%7B2%7D%7D&quot; alt=&quot;equation&quot; /&gt;  &lt;br /&gt;
+where R is correlation coefficients. A VIF value less than 1 is defined as non-correlated, while a VIF greater than 5 means highly correlated.&lt;/p&gt;
+&lt;h5 id=&quot;reference&quot;&gt;Reference&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rstudio-pubs-static.s3.amazonaws.com/222571_7b65a75ec1214b56bccafa79e8c7f9ed.html&quot;&gt;Principal Components Regression&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://yatani.jp/teaching/doku.php?id=hcistats:fa&quot;&gt;Factor Analysis&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gerardnico.com/data_mining/pca&quot;&gt;Data mining - Principal Component (Analysis/Regression)(PCA)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.analyticsvidhya.com/blog/2016/03/practical-guide-principal-component-analysis-python/&quot;&gt;Practical Guide to Principal Component Analysis (PCA) in R &amp;amp; Python&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.statisticshowto.datasciencecentral.com/variance-inflation-factor/&quot;&gt;Variance Inflation Factor&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.statpower.net/Content/312/R%20Stuff/Exploratory%20Factor%20Analysis%20with%20R.pdf&quot;&gt;Exploratory Factor Analysis with R&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/&quot;&gt;Principal Component Analysis in R: prcomp vs princomp&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 10 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/01/10/note/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/01/10/note/</guid>
+        
+        <category>R</category>
+        
+        <category>PCA</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Bootstrapping in R</title>
+        <description>&lt;p&gt;Bootstrapping method in R is convenient with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot&lt;/code&gt; package.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-bootstrap&quot;&gt;What is bootstrap&lt;/h3&gt;
+&lt;p&gt;Bootstrap is used to estimate quantity of a population by sampling with replacement. This is done by repeatedly taking relatively small samples, calculating the statistics, and taking the average fo the calculated statistics. A useful feature of the bootstrap method is that the resulting sample of estimation often forms a Gaussian distribution. A confidence interval can be calculated and used to bound the presented estimate, which can be used to present the estimated skill of a machine learning model. There are several forms of bootstrap: non-parametric, parametric, residual sampling, etc. Here we talk about the &lt;strong&gt;non-parametric bootstrap&lt;/strong&gt;, or case resampling. All original observations have equal probability of being drawn into a sample.&lt;/p&gt;
+
+&lt;p&gt;Bootstrapping is often used for calculating confidence intervals (&lt;strong&gt;CI&lt;/strong&gt;) and estimation of the standard errors, and estimating the bias of the point estimates. Methods for bootstrap CI include basic bootstrap, percentile bootstrap, studentized bootstrap, bias corrected and accelerated bootstrap (&lt;strong&gt;BCa&lt;/strong&gt;). BCa adjusts for both bias and skewness in the bootstrap distribution, which is accurate in a wide variety of settings and produces reasonably narrow intervals.&lt;/p&gt;
+
+&lt;p&gt;Increasing the number of samples doesn’t lead to better representation of the original dataset. It can only reduce the effects of random sampling errors. It is recommentded to use the bootstrap method when (&lt;a href=&quot;https://en.wikipedia.org/wiki/Bootstrapping_(statistics)&quot;&gt;wiki&lt;/a&gt;):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The theoretical distribution of a statitic of interest in complicated or unknown.&lt;/li&gt;
+  &lt;li&gt;The sample size is insufficient for straightforward statitical inference. If the underlying distribution is well-known, bootstrapping provides a way to account for the distortions caused by biased sampling.&lt;/li&gt;
+  &lt;li&gt;Power calculations have to be performed, and a small pilot sample is available.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-use-bootstrap-method-in-r&quot;&gt;How to use bootstrap method in R&lt;/h3&gt;
+&lt;p&gt;There are two parameters: the size of the sample and the number of repetitions. In machine learning, it is common to use a sample size that is the same as the original dataset. The number of repitations must be large enough to ensure that meaningful statistics can be calculated on the sample.&lt;/p&gt;
+
+&lt;p&gt;Using the &lt;a href=&quot;https://www.rdocumentation.org/packages/boot/versions/1.3-23?tap_a=5644-dce66f&amp;amp;tap_s=10907-287229&quot;&gt;boot&lt;/a&gt; package in R as the following steps:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Define a function to return statistics&lt;/li&gt;
+  &lt;li&gt;Use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot&lt;/code&gt; function&lt;/li&gt;
+  &lt;li&gt;Use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot.ci&lt;/code&gt; function to get the confidence intervals&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When we run the boot function, we have to decide the number of repetitions (R). Wilcox (2010) writes “599 is recommended for general use”, which is a minimum number of samples you should consider.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-interpret-bootstrapping-results&quot;&gt;How to interpret bootstrapping results&lt;/h3&gt;
+
+&lt;p&gt;We apply the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot.ci&lt;/code&gt; function which generates 5 different types of equi-tailed two-sided nonparametric confidence intervals: the basic bootstrap interval, the studentized bootstrap interval, the bootstrap percentile interval, and the adjusted bootstrap percentile interval. Here we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;type = 'bca'&lt;/code&gt;, which is a matric with 5 columns, the first column containing the level, the next two containing the indices of the order statistics used in the calculations and final two the calculated endpoints themselves.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;results = boot(data = observations, statistic = vd.mean, R = 10000)
+ci.results = boot.ci(results, type = 'bca')
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;reference&quot;&gt;Reference&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.r-bloggers.com/understanding-bootstrap-confidence-interval-output-from-the-r-boot-package/&quot;&gt;Understanding bootstrap confidence interval output from the r boot package&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stat.ethz.ch/R-manual/R-patched/library/boot/html/boot.ci.html&quot;&gt;Nonparametric Bootstrap confidence Intervals&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Wilcox, R. R. (2010). Fundamentals of modern statistical methods: Substantially improving power and accuracy. Springer.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 03 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2020/01/03/bootstrap/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2020/01/03/bootstrap/</guid>
+        
+        <category>R</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Audible</title>
+        <description>&lt;p&gt;I used to read paper books. Then I started using Kindle. Now I use Audible for its convenience. It is like compromising step by step. When I was little, I loved to sit there and listen to cassette tape stories with full attention. Audible reminds me of tapes. However, different from childhood addiction to story books, now it is time for self help books. I just use up monthly credits for two free books and audible originals, which in total 4 books.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Nov 2019 00:00:00 +0800</pubDate>
+        <link>https://shsun2012.github.io/2019/11/20/audible/</link>
+        <guid isPermaLink="true">https://shsun2012.github.io/2019/11/20/audible/</guid>
+        
+        <category>Book</category>
         
         
       </item>

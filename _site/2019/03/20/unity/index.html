@@ -11,30 +11,28 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Set up a personal website with templates - shsun的博客 | Shsun">
+    <meta property="og:title" content="My first platform game - shsun的博客 | Shsun">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Before start
-I was intended to write all the css and html scripts since I’ve taken related courses in college. Truth is, I have only learned the basics, some even outdated. It is also complicated e...">
+    <meta property="og:description" content="My first attempt to make a 2D platform game with Unity was back in 2016. The first chapter of this game was recorded here on Bilibili.
+">
     
-    <meta property="article:published_time" content="2019-11-11T00:00:00Z">
+    <meta property="article:published_time" content="2019-03-20T00:00:00Z">
     
     
     <meta property="article:author" content="Shsun">
     
     
+    <meta property="article:tag" content="Unity3D">
+    
     <meta property="article:tag" content="Blog">
     
-    <meta property="article:tag" content="Jekyll">
     
-    <meta property="article:tag" content="Bootstrap">
-    
-    
-    <meta property="og:image" content="http://localhost:4000/img/about-bg.jpg">
-    <meta property="og:url" content="http://localhost:4000/2019/11/11/first-blog/">
+    <meta property="og:image" content="https://shsun2012.github.io/img/about-bg.jpg">
+    <meta property="og:url" content="https://shsun2012.github.io/2019/03/20/unity/">
     <meta property="og:site_name" content="shsun的博客 | Shsun">
     
-    <title>Set up a personal website with templates - shsun的博客 | Shsun</title>
+    <title>My first platform game - shsun的博客 | Shsun</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -43,7 +41,7 @@ I was intended to write all the css and html scripts since I’ve taken related 
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2019/11/11/first-blog/">
+    <link rel="canonical" href="https://shsun2012.github.io/2019/03/20/unity/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -97,7 +95,7 @@ I was intended to write all the css and html scripts since I’ve taken related 
                     
                     
                     <li>
-                        <a href="/about/">About</a>
+                        <a href="/about/">Biography</a>
                     </li>
                     
                     
@@ -109,6 +107,14 @@ I was intended to write all the css and html scripts since I’ve taken related 
                     
                     
                     
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/research/">Research</a>
+                    </li>
                     
                     
                     
@@ -202,17 +208,15 @@ I was intended to write all the css and html scripts since I’ve taken related 
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/archive/?tag=Unity3D" title="Unity3D">Unity3D</a>
+                        
                         <a class="tag" href="/archive/?tag=Blog" title="Blog">Blog</a>
                         
-                        <a class="tag" href="/archive/?tag=Jekyll" title="Jekyll">Jekyll</a>
-                        
-                        <a class="tag" href="/archive/?tag=Bootstrap" title="Bootstrap">Bootstrap</a>
-                        
                     </div>
-                    <h1>Set up a personal website with templates</h1>
+                    <h1>My first platform game</h1>
                     
-                    <h2 class="subheading">My first blog</h2>
-                    <span class="meta">Posted by Shsun on November 11, 2019</span>
+                    <h2 class="subheading">Game Development with Unity3D</h2>
+                    <span class="meta">Posted by Shsun on March 20, 2019</span>
                 </div>
             </div>
         </div>
@@ -238,116 +242,34 @@ I was intended to write all the css and html scripts since I’ve taken related 
                 <!-- Multi-Lingual -->
                 
 
-				<h3 id="before-start">Before start</h3>
-<p>I was intended to write all the css and html scripts since I’ve taken related courses in college. Truth is, I have only learned the basics, some even outdated. It is also complicated enough for me to give up at the very first step. After a year, I decide to use templates and to make things easier.</p>
+				<p>My first attempt to make a 2D platform game with Unity was back in 2016. The first chapter of this game was recorded <a href="https://www.bilibili.com/video/av4137891">here on Bilibili</a>.</p>
 
-<h3 id="bootstrap-templates">Bootstrap Templates</h3>
-<p>By using templates, I meant to implement bootstrap on my current Github website. I read some great tutorials such as <a href="https://nicolas-van.github.io/bootstrap-4-github-pages/">Bootstrap 4 start-up</a> and also the <a href="https://getbootstrap.com/docs/4.3/getting-started/introduction/">official introduction to bootstrap</a>. Then I came to this blog template, <a href="https://github.com/BlackrockDigital/startbootstrap-clean-blog">Clean Blog</a>. I’ve seen many people using very similar layout, which they probably forked from this. Finally I decided to fork <a href="https://huangxuan.me/">Hux Blog</a> which is also derived from Clean Blog but with more functions.</p>
+<p>I used C# following online tutorials and created some assets, colliders, prefebs, layers, animations and everything. The character tiles were painted in a pixel style with PhotoShop, while some tree tiles were from pixel art resources. After I figured out the general framework of the game and how to connect different levels, I stuck at a point when I started writing character dialogue: What is the story? What do you want to convey to the players?</p>
 
-<h3 id="set-up-environment">Set up environment</h3>
-<p>GitHub Pages are powered by <a href="https://github.com/jekyll/jekyll"><em>Jekyll</em></a>, a blog-aware static site generator in Ruby. which can be used to maintain your website and test locally. You may need to update your ruby version and change the path for default ruby. To do this, first install rvm:</p>
+<p>I thought to create a game about a shiba dog woke up one morning, realizing that it was a dog and began to seek the cure. Then the shiba went through different levels and adventure stuff, in the campus (yes that’s the background setting), and finally found the magic to transfrom back to human.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>brew <span class="nb">install </span>ruby
-<span class="gp">~$</span><span class="w"> </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/.gem/ruby/X.X.0/bin:<span class="nv">$PATH</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<p>I’ve learned a lot and tried many things. I made a 3D fluffy shiba with Blender, a wonderful 3D creation software. Then I found it was too complicated to make a 3D game, with only myself. Then the most realistic choice was to make an ordinary 2D platform game. Anyway, it’s the story that matters. The sad thing was, I don’t have the energy for creating a wonderful story and the motivation for finishing the entire game, as I was to graduate and things happened.</p>
 
-<p>Install Jekyll with gem.</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>gem <span class="nb">install </span>bundler jekyll
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-
-<p>To start, use bundler (this will generate a Gemfile):</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>bundle init
-<span class="gp">~$</span><span class="w"> </span>bundle add jekyll
-<span class="gp">~$</span><span class="w"> </span>bundle <span class="nb">exec </span>jekyll serve
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-<p>Two major issues I’ve encountered when jekyll failed are ruby version and xcode version. The xcode issue (also outdated gcc version) is solved in <a href="https://github.com/juthilo/run-jekyll-on-windows/issues/34">this solution thread</a> by:</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="gp">~$</span><span class="w"> </span>gem sources <span class="nt">--remove</span> https://rubygems.org/
-<span class="gp">~$</span><span class="w"> </span>gem sources <span class="nt">-a</span> http://rubygems.org/
-<span class="gp">~$</span><span class="w"> </span>gem <span class="nb">install </span>jekyll
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-<h3 id="start-blogging">Start blogging</h3>
-<p>After setting up the website, now it’s time to start blogging with markdown which converts your text to HTML files. I used to set up my website for a CS course homework with hand-written html and css. Those days are gone now. Markdown makes things easier.</p>
-
-<h3 id="add-emojis-smiley">Add emojis <img class="emoji" title=":smiley:" alt=":smiley:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png" height="20" width="20">
-</h3>
-
-<p>A issue caused by img settings in css files. A couple of lines needed for using <a href="https://github.com/jekyll/jemoji"><em>Jemoji</em></a>.</p>
-<ul>
-  <li>First update sheetstyle file to use inline (if default is block) for img.emoji. Then update min.css file.
-    <div class="language-html highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre>img.emoji {
-  display: inline;
-  height: 1em;
-  width: 1em;
-  margin-bottom: 0.25em;
-}
-</pre></td>
-</tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Install jemoji:
-    <div class="language-console highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="go">gem install jemoji
-</span></pre></td>
-</tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Modify Gemfile (or bundel add jemoji)
-    <div class="language-console highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="go">gem 'jemoji'
-</span></pre></td>
-</tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Add jemoji in config.yml:
-    <div class="highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>plugins:  - jemoji
-</pre></td>
-</tr></tbody></table></code></pre></div>    </div>
-    <p>Some cheat sheet for emojis <a href="https://www.webfx.com/tools/emoji-cheat-sheet/">here</a>.</p>
-  </li>
-  <li>Enjoy<img class="emoji" title=":pig:" alt=":pig:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f437.png" height="20" width="20">!</li>
-</ul>
+<p>It’s still amazing to see that I was so eager to learn so many things in a short time period, just to show off <img class="emoji" title=":joy:" alt=":joy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png" height="20" width="20"><img class="emoji" title=":joy:" alt=":joy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png" height="20" width="20"><img class="emoji" title=":joy:" alt=":joy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png" height="20" width="20"></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2019/01/20/comic/" data-toggle="tooltip" data-placement="top" title="Life in HK">
+                        Previous<br>
+                        <span>Life in HK</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/11/17/lc-note/" data-toggle="tooltip" data-placement="top" title="Python learning with LeetCode">
+                        Next<br>
+                        <span>Python learning with LeetCode</span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -378,7 +300,14 @@ I was intended to write all the css and html scripts since I’ve taken related 
         
         
         
-    </div>
+        
+                <a data-sort="0011" href="/archive/?tag=Blog" title="Blog" rel="3">Blog</a>
+        
+                <a data-sort="0006" href="/archive/?tag=R" title="R" rel="8">R</a>
+        
+                <a data-sort="0012" href="/archive/?tag=PCA" title="PCA" rel="2">PCA
+    </a>
+</div>
 </section>
 
 
@@ -461,7 +390,7 @@ I was intended to write all the css and html scripts since I’ve taken related 
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright © Shsun 2019
+                    Copyright © Shsun 2022
                     <br>
                 </p>
             </div>
